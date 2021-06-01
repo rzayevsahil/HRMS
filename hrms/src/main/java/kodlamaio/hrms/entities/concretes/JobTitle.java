@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="job_titles")
+@Table(name="job_titles") 
 @AllArgsConstructor
 @NoArgsConstructor
 public class JobTitle {
