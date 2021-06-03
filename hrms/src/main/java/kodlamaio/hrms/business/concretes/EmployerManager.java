@@ -44,6 +44,7 @@ public class EmployerManager implements EmployerService {
 
 	
 	//******************************************* KURALLAR *******************************************
+	
 
 	private Result emailExist(String email) {
 		if (employerDao.findAllByEmail(email).stream().count() != 0) {
