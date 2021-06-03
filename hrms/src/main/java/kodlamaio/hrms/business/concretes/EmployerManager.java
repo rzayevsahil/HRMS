@@ -60,7 +60,7 @@ public class EmployerManager implements EmployerService {
 			return new ErrorResult("bu alanlar boş bırakılamaz");
 		}
 		return new SuccessResult();
-	} 
+	}  
 
 	private Result checkIfEqualEmailAndDomain(String email, String website) {
 
