@@ -46,7 +46,7 @@ public class CandidateManager implements CandidateService {
 	}
 	
 	
-	// kurallar
+	//******************************************* KURALLAR *******************************************
 
 	private Result identityNumberControl(Candidate candidate) {
 
