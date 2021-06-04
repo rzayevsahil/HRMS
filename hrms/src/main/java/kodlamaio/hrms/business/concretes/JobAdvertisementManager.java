@@ -44,8 +44,7 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 				nullControl(jobAdvertisement),
 				minSalaryControl(jobAdvertisement),
 				quotaControl(jobAdvertisement),
-				minMaxControl(jobAdvertisement),
-				minEqualsMaxControl(jobAdvertisement));
+				salaryControl(jobAdvertisement));
 		
 		if(result.isSuccess()) {	
 			
@@ -109,19 +108,21 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 		return new SuccessResult();
 	}
 	
-	private Result minMaxControl(JobAdvertisement jobAdvertisement) {
+	private Result salaryControl(JobAdvertisement jobAdvertisement) {
 		if(jobAdvertisement.getMinSalary()>jobAdvertisement.getMaxSalary()) {
-			return new ErrorResult("minimum maaş maximum maaştan büyük olamaz");
+			return new ErrorResult("Minimum maaş maximum maaştan büyük olamaz");
+		}else if(jobAdvertisement.getMinSalary().equals(jobAdvertisement.getMaxSalary())) {
+			return new ErrorResult("Minimum maaş maximum maaşa eşit olamaz");
 		}
 		return new SuccessResult();
 	}
 	
-	private Result minEqualsMaxControl(JobAdvertisement jobAdvertisement) {
+	/*private Result minEqualsMaxControl(JobAdvertisement jobAdvertisement) {
 		if(jobAdvertisement.getMinSalary().equals(jobAdvertisement.getMaxSalary())) {
-			return new ErrorResult("minimum maaş maximum maaşa eşit olamaz");
+			return new ErrorResult("Minimum maaş maximum maaşa eşit olamaz");
 		}
 		return new SuccessResult();
-	}
+	}*/
 
 
 }

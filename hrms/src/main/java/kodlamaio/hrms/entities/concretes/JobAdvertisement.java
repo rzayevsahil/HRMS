@@ -60,7 +60,7 @@ public class JobAdvertisement {
 	private LocalDate applicationDeadline;
 	
 	@Column(name="created_date")
-	private LocalDate createdDate=LocalDate.now();
+	private LocalDateTime createdDate;
 	
 	@Column(name="is_active")
 	private boolean isActive;
