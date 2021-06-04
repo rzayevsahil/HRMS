@@ -60,10 +60,23 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	
-	
+
+	@Override
+	public DataResult<List<JobAdvertisement>> getByIsActiveTrueOrderByApplicationDeadlineAsc() {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByIsActiveTrueOrderByApplicationDeadlineAsc(),"Data listelendi");
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> getByisActiveTrueAndEmployerId(int id) {
+		return new SuccessDataResult<List<JobAdvertisement>>(jobAdvertisementDao.getByisActiveTrueAndEmployer_Id(id));
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> findAllByIsActiveTrue() {
+		return new SuccessDataResult<List<JobAdvertisement>>(jobAdvertisementDao.findAllByIsActiveTrue());
+	}
+
+
 	//************************** Kurallar ***********************************
 	
 	private Result employerControl(int id) {
@@ -117,12 +130,7 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 		return new SuccessResult();
 	}
 	
-	/*private Result minEqualsMaxControl(JobAdvertisement jobAdvertisement) {
-		if(jobAdvertisement.getMinSalary().equals(jobAdvertisement.getMaxSalary())) {
-			return new ErrorResult("Minimum maaş maximum maaşa eşit olamaz");
-		}
-		return new SuccessResult();
-	}*/
+
 
 
 }
