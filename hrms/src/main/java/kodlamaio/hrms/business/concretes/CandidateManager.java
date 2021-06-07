@@ -14,7 +14,7 @@ import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.core.utilities.business.BusinessRules;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateDao;
-import kodlamaio.hrms.entities.concretes.Candidate;
+import kodlamaio.hrms.entities.concretes.JobSeeker;
 
 @Service
 public class CandidateManager implements CandidateService {
@@ -28,12 +28,12 @@ public class CandidateManager implements CandidateService {
 	}
 
 	@Override
-	public DataResult<List<Candidate>> getAll() {
-		return new SuccessDataResult<List<Candidate>>(candidateDao.findAll(), "Data Listelendi");
+	public DataResult<List<JobSeeker>> getAll() {
+		return new SuccessDataResult<List<JobSeeker>>(candidateDao.findAll(), "Data Listelendi");
 	}
 
 	@Override
-	public Result add(Candidate candidate) {
+	public Result add(JobSeeker candidate) {
 		Result result = BusinessRules.run(identityNumberControl(candidate), nullControl(candidate),
 				emailExist(candidate.getEmail()), emailFormatCheck(candidate.getEmail()),tcExist(candidate.getIdentificationNumber()));
 
@@ -48,7 +48,7 @@ public class CandidateManager implements CandidateService {
 	
 	//******************************************* KURALLAR *******************************************
 
-	private Result identityNumberControl(Candidate candidate) {
+	private Result identityNumberControl(JobSeeker candidate) {
 
 		if (candidate.getIdentificationNumber().length() != 11) {
 			return new ErrorResult("Tc numarası 11 haneli olmalıdır!");
@@ -56,7 +56,7 @@ public class CandidateManager implements CandidateService {
 		return new SuccessResult();
 	}
 
-	private Result nullControl(Candidate candidate) {
+	private Result nullControl(JobSeeker candidate) {
 		if (candidate.getEmail().isEmpty() || candidate.getPassword().isEmpty() || candidate.getBirthDate()==null
 				|| candidate.getFirstName().isEmpty() || candidate.getLastName().isEmpty()
 				|| candidate.getIdentificationNumber().isEmpty()) {

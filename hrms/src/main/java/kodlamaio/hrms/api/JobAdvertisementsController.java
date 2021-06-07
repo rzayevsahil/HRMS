@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kodlamaio.hrms.business.abstracts.JobAdvertisementService;
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.Result;
-import kodlamaio.hrms.entities.concretes.JobAdvertisement;
+import kodlamaio.hrms.entities.concretes.JobAdvert;
 
 @RestController
 @RequestMapping("/api/jobadvertisements/")
@@ -28,17 +28,17 @@ public class JobAdvertisementsController {
 	}
 	
 	@GetMapping("getall")
-	public DataResult<List<JobAdvertisement>>  getAll(){
+	public DataResult<List<JobAdvert>>  getAll(){
 		return this.jobAdvertisementService.getAll();
 	}
 	
 	@PostMapping("add")
-	public Result add(@RequestBody JobAdvertisement jobAdvertisement){
+	public Result add(@RequestBody JobAdvert jobAdvertisement){
 		return this.jobAdvertisementService.add(jobAdvertisement);
 	}
 	
 	@GetMapping("getByIsActiveTrueOrderByApplicationDeadlineAsc")
-	public DataResult<List<JobAdvertisement>>  getByIsActiveTrueOrderByApplicationDeadlineAsc(){
+	public DataResult<List<JobAdvert>>  getByIsActiveTrueOrderByApplicationDeadlineAsc(){
 		return this.jobAdvertisementService.getByIsActiveTrueOrderByApplicationDeadlineAsc();
 	}	
 
@@ -48,7 +48,7 @@ public class JobAdvertisementsController {
 	}
 
 	@GetMapping("findAllByIsActiveTrue")
-	public DataResult<List<JobAdvertisement>> findAllByIsActiveTrue(){
+	public DataResult<List<JobAdvert>> findAllByIsActiveTrue(){
 		return this.jobAdvertisementService.findAllByIsActiveTrue();
 	}
 

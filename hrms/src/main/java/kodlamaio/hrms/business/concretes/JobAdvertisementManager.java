@@ -15,7 +15,7 @@ import kodlamaio.hrms.core.utilities.business.BusinessRules;
 import kodlamaio.hrms.dataAccess.abstracts.CityDao;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdvertisementDao;
-import kodlamaio.hrms.entities.concretes.JobAdvertisement;
+import kodlamaio.hrms.entities.concretes.JobAdvert;
 
 @Service
 public class JobAdvertisementManager implements JobAdvertisementService {
@@ -33,12 +33,12 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 	}
 	
 	@Override
-	public DataResult<List<JobAdvertisement>> getAll() {
-		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll(),"data listelendi");
+	public DataResult<List<JobAdvert>> getAll() {
+		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertisementDao.findAll(),"data listelendi");
 	}
 
 	@Override
-	public Result add(JobAdvertisement jobAdvertisement) {
+	public Result add(JobAdvert jobAdvertisement) {
 		Result result = BusinessRules.run( employerControl(jobAdvertisement.getEmployer().getId()),
 				cityControl(jobAdvertisement.getCity().getId()),
 				nullControl(jobAdvertisement),
@@ -56,24 +56,24 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 	}
 
 	@Override
-	public Result update(int jobAdvertisementId, JobAdvertisement jobAdvertisement) {
+	public Result update(int jobAdvertisementId, JobAdvert jobAdvertisement) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public DataResult<List<JobAdvertisement>> getByIsActiveTrueOrderByApplicationDeadlineAsc() {
-		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByIsActiveTrueOrderByApplicationDeadlineAsc(),"Data listelendi");
+	public DataResult<List<JobAdvert>> getByIsActiveTrueOrderByApplicationDeadlineAsc() {
+		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertisementDao.getByIsActiveTrueOrderByApplicationDeadlineAsc(),"Data listelendi");
 	}
 
 	@Override
-	public DataResult<List<JobAdvertisement>> getByisActiveTrueAndEmployerId(int id) {
-		return new SuccessDataResult<List<JobAdvertisement>>(jobAdvertisementDao.getByisActiveTrueAndEmployer_Id(id));
+	public DataResult<List<JobAdvert>> getByisActiveTrueAndEmployerId(int id) {
+		return new SuccessDataResult<List<JobAdvert>>(jobAdvertisementDao.getByisActiveTrueAndEmployer_Id(id));
 	}
 
 	@Override
-	public DataResult<List<JobAdvertisement>> findAllByIsActiveTrue() {
-		return new SuccessDataResult<List<JobAdvertisement>>(jobAdvertisementDao.findAllByIsActiveTrue());
+	public DataResult<List<JobAdvert>> findAllByIsActiveTrue() {
+		return new SuccessDataResult<List<JobAdvert>>(jobAdvertisementDao.findAllByIsActiveTrue());
 	}
 
 
@@ -93,7 +93,7 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 		return new SuccessResult();
 	}
 	
-	private Result nullControl(JobAdvertisement jobAdvertisement) {
+	private Result nullControl(JobAdvert jobAdvertisement) {
 		if(jobAdvertisement.getDescription().isEmpty()) {
 			return new ErrorResult("iş tanımı alanı boş olamaz");
 		}
@@ -107,21 +107,21 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 		return new SuccessResult();
 	}
 	
-	private Result minSalaryControl(JobAdvertisement jobAdvertisement) {
+	private Result minSalaryControl(JobAdvert jobAdvertisement) {
 		if(jobAdvertisement.getMinSalary()<3000) {
 			return new ErrorResult("minimum maaş 3000 tl'den az olamaz");
 		}
 		return new SuccessResult();
 	}
 	
-	private Result quotaControl(JobAdvertisement jobAdvertisement) {
+	private Result quotaControl(JobAdvert jobAdvertisement) {
 		if(jobAdvertisement.getQuota()<1) {
 			return new ErrorResult("açık pozisyon adedi 1'den küçük olamaz");
 		}
 		return new SuccessResult();
 	}
 	
-	private Result salaryControl(JobAdvertisement jobAdvertisement) {
+	private Result salaryControl(JobAdvert jobAdvertisement) {
 		if(jobAdvertisement.getMinSalary()>jobAdvertisement.getMaxSalary()) {
 			return new ErrorResult("Minimum maaş maximum maaştan büyük olamaz");
 		}else if(jobAdvertisement.getMinSalary().equals(jobAdvertisement.getMaxSalary())) {

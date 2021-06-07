@@ -12,7 +12,7 @@ import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.core.utilities.business.BusinessRules;
 import kodlamaio.hrms.dataAccess.abstracts.JobTitleDao;
-import kodlamaio.hrms.entities.concretes.JobTitle;
+import kodlamaio.hrms.entities.concretes.JobPosition;
 
 @Service
 public class JobTitleManager implements JobTitleService {
@@ -25,12 +25,12 @@ public class JobTitleManager implements JobTitleService {
 	}
 
 	@Override
-	public DataResult<List<JobTitle>> getAll() {
-		return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findAll(),"Data listelendi");
+	public DataResult<List<JobPosition>> getAll() {
+		return new SuccessDataResult<List<JobPosition>>(this.jobTitleDao.findAll(),"Data listelendi");
 	}
 
 	@Override
-	public Result add(JobTitle jobTitle) {
+	public Result add(JobPosition jobTitle) {
 		Result result=BusinessRules.run(nullControl(jobTitle),titleRepeatControl(jobTitle));
 		if (result.isSuccess()) {
 			this.jobTitleDao.save(jobTitle);
@@ -43,14 +43,14 @@ public class JobTitleManager implements JobTitleService {
 	
 	//******************************************* KURALLAR *******************************************
 	
-	private Result nullControl(JobTitle jobTitle) {
+	private Result nullControl(JobPosition jobTitle) {
 		if(jobTitle.getTitle()==null || jobTitle.getTitle().isEmpty()) {
 			return new ErrorResult("Alanlar boş bırakılamaz");
 		}
 		return new SuccessResult();
 	}
 	
-	private Result titleRepeatControl(JobTitle jobTitle) {
+	private Result titleRepeatControl(JobPosition jobTitle) {
 		if(jobTitleDao.findAllByTitle(jobTitle.getTitle()).stream().count()!=0) {
 			return new ErrorResult("Bu pozisyon mevcut");
 		}

@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import kodlamaio.hrms.entities.concretes.Candidate;
+import kodlamaio.hrms.entities.concretes.JobSeeker;
 
-public interface CandidateDao extends JpaRepository<Candidate, Integer> {
+public interface CandidateDao extends JpaRepository<JobSeeker, Integer> {
 
-	List<Candidate> findAllByEmail(String email);
-	List<Candidate> findAllByIdentificationNumber(String identificationNumber);
+	List<JobSeeker> findAllByEmail(String email);
+	List<JobSeeker> findAllByIdentificationNumber(String identificationNumber);
 }

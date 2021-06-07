@@ -5,12 +5,12 @@ import java.util.List;
 
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.Result;
-import kodlamaio.hrms.entities.concretes.JobTitle;
+import kodlamaio.hrms.entities.concretes.JobPosition;
 
 
 public interface JobTitleService {
 	
-	DataResult<List<JobTitle>> getAll();
+	DataResult<List<JobPosition>> getAll();
 	
-	Result add(JobTitle jobTitle);
+	Result add(JobPosition jobTitle);
 }

@@ -67,7 +67,7 @@ public class EmployerManager implements EmployerService {
 		String[] emailArr = email.split("@", 2); // @ gördüğünde böler 2 ayrı parçaya ve dizide tuttuk
 		String domain = website.substring(4, website.length()); // 4. karakterden başlayıp website uzunluğu kadar alır
 		// System.out.println(domain);
-
+		//www.kodlamaio.com - kullanıcıismi@kodlamaio.com
 		if (emailArr[1].equals(domain)) {
 			return new SuccessResult("Domain eklendi");
 		}

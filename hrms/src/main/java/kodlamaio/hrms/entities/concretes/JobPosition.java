@@ -1,5 +1,8 @@
 package kodlamaio.hrms.entities.concretes;
 
+
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,7 +15,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -22,24 +24,35 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="cities")
+@Table(name="job_positions")
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdverts"})
-public class City {
-
+public class JobPosition {
+	 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private int id;
+	private int id; 
 	
-	@Column(name="name")
+	@Column(name="job_title")
+	@NotNull(message="JobTitle can not be null")
 	@NotBlank
-	@NotNull(message="CityName cannot be null")
-	private String name;
-	
+	private String jobTitle;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "city" )
-	private List<JobAdvert> jobAdverts;
+	@Column(name= "created_at", columnDefinition = "Date default CURRENT_DATE")	
+	private LocalDateTime createdDate = LocalDateTime.now();
+	
+	@Column(name= "is_active", columnDefinition = "boolean default true")
+	private boolean isActive = true;
+	
+	@Column(name= "is_deleted", columnDefinition = "boolean default false")
+	private boolean isDeleted = false;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "jobPosition")
+	private List<JobAdvert> jobAdverts; 
+	
+	
 }
