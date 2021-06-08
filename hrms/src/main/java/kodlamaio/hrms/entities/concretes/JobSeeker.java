@@ -70,7 +70,7 @@ public class JobSeeker extends User {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="jobSeeker")	
-	private List<SkillForCv> skills;
+	private List<SkillForCv> skills; 
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="jobSeeker")
