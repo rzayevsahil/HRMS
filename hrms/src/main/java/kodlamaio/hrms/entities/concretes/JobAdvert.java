@@ -38,11 +38,12 @@ public class JobAdvert {
 	
 	@Column(name="description",length = 3000)
 	@Type(type="text")
-	@NotNull
+	@NotNull(message="Description can not be null")
 	@NotBlank
 	private String description;	
 
 	@Column(name = "salary_min")
+	@Min(3000)
 	private int salaryMin;
 
 	@Column(name = "salary_max")
@@ -50,15 +51,20 @@ public class JobAdvert {
 	
 	@Column(name = "open_position_count")
 	@Min(value=1)
+	@NotNull(message="PositionCount can not be null")
+	@NotBlank
 	private int openPositionCount;
 
 	@Column(name = "deadline")
+	@NotNull(message="PositionCount can not be null")
 	@Future
 	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@NotNull(message="Deadline can not be null")
 	private LocalDateTime deadline;
 	
 	@Column(name = "published_at")
 	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@NotNull(message="PublishedAt can not be null")
 	private LocalDateTime publishedAt;
 
 	@Column(name = "created_at", columnDefinition = "Date default CURRENT_DATE")

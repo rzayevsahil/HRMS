@@ -6,11 +6,11 @@ import kodlamaio.hrms.entities.concretes.JobAdvert;
 
 import java.util.List;
 
-public interface JobAdvertisementDao extends JpaRepository<JobAdvert, Integer> {
+public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer> {
 
-   /* List<JobAdvert> getByIsActiveTrueOrderByApplicationDeadlineAsc();
+    List<JobAdvert> getByIsActiveTrueOrderByDeadlineAsc();
 
     List<JobAdvert> findAllByIsActiveTrue();
 
-    List<JobAdvert> getByisActiveTrueAndEmployer_Id(int id);*/
+    List<JobAdvert> getByIsActiveTrueAndEmployer_Id(int id);
 }
