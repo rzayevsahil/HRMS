@@ -24,7 +24,7 @@ public class EmployerManager implements EmployerService {
 		this.employerDao = employerDao;
 	}
 
-	/*@Override
+	@Override
 	public DataResult<List<Employer>> getAll() {
 
 		return new SuccessDataResult<List<Employer>>(this.employerDao.findAll(), "Data listelendi");
@@ -33,45 +33,53 @@ public class EmployerManager implements EmployerService {
 	@Override
 	public Result add(Employer employer) {
 		
-		Result result = BusinessRules.run(emailExist(employer.getEmail()), nullControl(employer),checkIfEqualEmailAndDomain(employer.getEmail(), employer.getWebAddress()));
+		Result result = BusinessRules.run(emailExist(employer.getEmail()),checkIfEqualEmailAndDomain(employer.getEmail(), employer.getWebsite()));
 
 		if (result.isSuccess()) {
 			employerDao.save(employer);
-			return new SuccessResult("eklendi");
+			return new SuccessResult("Employer added");
 		}
 		return result;
-	}*/
+	}
+
+	@Override
+	public Result update(Employer employer) {
+		Result result = BusinessRules.run(emailExist(employer.getEmail()),checkIfEqualEmailAndDomain(employer.getEmail(), employer.getWebsite()));
+
+		if (result.isSuccess()) {
+			employerDao.save(employer);
+			return new SuccessResult("Employer update");
+		}
+		return result;
+	}
+
+	@Override
+	public Result delete(int id) {
+		this.employerDao.deleteById(id);
+		return new SuccessResult("Employer deleted");
+	}
 
 	
 	//******************************************* KURALLAR *******************************************
 	
 
-	/*private Result emailExist(String email) {
+	private Result emailExist(String email) {
 		if (employerDao.findAllByEmail(email).stream().count() != 0) {
-			return new ErrorResult("bu email mevcut");
+			return new ErrorResult("This Email is available");
 		}
 		return new SuccessResult();
-	}*/
-
-	/*private Result nullControl(Employer employer) {
-		if (employer.getEmail().equals("") || employer.getPassword().isEmpty()
-				|| employer.getCompanyName().equals("") || employer.getWebAddress().equals("")) {
-
-			return new ErrorResult("bu alanlar boş bırakılamaz");
-		}
-		return new SuccessResult();
-	}   */
-
-	/*private Result checkIfEqualEmailAndDomain(String email, String website) {
+	}
+	
+	private Result checkIfEqualEmailAndDomain(String email, String website) {
 
 		String[] emailArr = email.split("@", 2); // @ gördüğünde böler 2 ayrı parçaya ve dizide tuttuk
 		String domain = website.substring(4, website.length()); // 4. karakterden başlayıp website uzunluğu kadar alır
 		// System.out.println(domain);
 		//www.kodlamaio.com - kullanıcıismi@kodlamaio.com
 		if (emailArr[1].equals(domain)) {
-			return new SuccessResult("Domain eklendi");
+			return new SuccessResult("Domain added");
 		}
-		return new ErrorResult("Domain hatalı");
+		return new ErrorResult("Domain is wrong");
 	}
-*/
+
 }
