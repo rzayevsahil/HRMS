@@ -8,5 +8,5 @@ import kodlamaio.hrms.entities.concretes.JobPosition;
 
 public interface JobTitleDao extends JpaRepository<JobPosition, Integer> {
 	
-	List<JobPosition> findAllByTitle(String title);
+	/*List<JobPosition> findAllByTitle(String title);*/
 }

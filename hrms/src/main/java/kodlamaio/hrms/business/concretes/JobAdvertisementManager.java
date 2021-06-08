@@ -32,7 +32,7 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 		this.cityDao = cityDao;
 	}
 	
-	@Override
+	/*@Override
 	public DataResult<List<JobAdvert>> getAll() {
 		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertisementDao.findAll(),"data listelendi");
 	}
@@ -53,9 +53,9 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 			
 		}
 		return result;
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public Result update(int jobAdvertisementId, JobAdvert jobAdvertisement) {
 		// TODO Auto-generated method stub
 		return null;
@@ -63,7 +63,7 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 
 	@Override
 	public DataResult<List<JobAdvert>> getByIsActiveTrueOrderByApplicationDeadlineAsc() {
-		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertisementDao.getByIsActiveTrueOrderByApplicationDeadlineAsc(),"Data listelendi");
+		//return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertisementDao.getByIsActiveTrueOrderByApplicationDeadlineAsc(),"Data listelendi");
 	}
 
 	@Override
@@ -74,12 +74,12 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 	@Override
 	public DataResult<List<JobAdvert>> findAllByIsActiveTrue() {
 		return new SuccessDataResult<List<JobAdvert>>(jobAdvertisementDao.findAllByIsActiveTrue());
-	}
+	}*/
 
 
 	//************************** Kurallar ***********************************
 	
-	private Result employerControl(int id) {
+	/*private Result employerControl(int id) {
 		if(!employerDao.existsById(id)) {
 			return new ErrorResult("böyle bir kullanıcı yok");
 		}
@@ -91,9 +91,9 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 			return new ErrorResult("böyle bir şehir yok");
 		}
 		return new SuccessResult();
-	}
+	}*/
 	
-	private Result nullControl(JobAdvert jobAdvertisement) {
+	/*private Result nullControl(JobAdvert jobAdvertisement) {
 		if(jobAdvertisement.getDescription().isEmpty()) {
 			return new ErrorResult("iş tanımı alanı boş olamaz");
 		}
@@ -128,7 +128,7 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 			return new ErrorResult("Minimum maaş maximum maaşa eşit olamaz");
 		}
 		return new SuccessResult();
-	}
+	}*/
 	
 
 

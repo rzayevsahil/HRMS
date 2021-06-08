@@ -1,5 +1,7 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -46,7 +48,8 @@ public class JobSeeker extends User {
 	@Size(min = 2, max = 25, message = "LastName must be between 2 and 25 characters")
 	private String lastName;
 
-	@Column(name = "national_id")
+	@Column(name = "national_id",unique = true)
+	@NotNull(message = "NationalId cannot be null")
 	@Min(value = 11)
 	@Max(value = 11)
 	private String nationalId;
@@ -55,9 +58,9 @@ public class JobSeeker extends User {
 	@OneToMany(mappedBy = "jobSeeker")	
 	private List<LanguageForCv> languages;
 	
-	@JsonIgnore
+	/*@JsonIgnore
 	@OneToOne(mappedBy = "jobSeeker", optional=false, fetch=FetchType.LAZY)
-	private ImageForCv image;
+	private ImageForCv image;*/
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="jobSeeker")	
@@ -76,8 +79,9 @@ public class JobSeeker extends User {
 	private List<CoverLetterForCv> coverLetters;
 	
 	@Column(name = "date_of_birth")
+	@NotNull(message="DateOfBirth can not be null")
 	@Past
-	private LocalDateTime dateOfBirth;
+	private LocalDate dateOfBirthDate;
 
 	@Column(name = "is_verified", columnDefinition = "boolean default false")
 	private boolean isVerified = false;

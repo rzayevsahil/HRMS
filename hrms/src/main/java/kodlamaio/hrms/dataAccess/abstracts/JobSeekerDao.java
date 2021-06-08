@@ -6,8 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import kodlamaio.hrms.entities.concretes.JobSeeker;
 
-public interface CandidateDao extends JpaRepository<JobSeeker, Integer> {
+public interface JobSeekerDao extends JpaRepository<JobSeeker, Integer> {
 
 	List<JobSeeker> findAllByEmail(String email);
-	List<JobSeeker> findAllByIdentificationNumber(String identificationNumber);
+	List<JobSeeker> findAllByNationalId(String nationalId);
+	JobSeeker findJobseekerByNationalId(String nationalId);
+	JobSeeker getById(int id);
 }

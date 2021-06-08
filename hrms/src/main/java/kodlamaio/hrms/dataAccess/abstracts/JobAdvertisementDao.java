@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface JobAdvertisementDao extends JpaRepository<JobAdvert, Integer> {
 
-    List<JobAdvert> getByIsActiveTrueOrderByApplicationDeadlineAsc();
+   /* List<JobAdvert> getByIsActiveTrueOrderByApplicationDeadlineAsc();
 
     List<JobAdvert> findAllByIsActiveTrue();
 
-    List<JobAdvert> getByisActiveTrueAndEmployer_Id(int id);
+    List<JobAdvert> getByisActiveTrueAndEmployer_Id(int id);*/
 }

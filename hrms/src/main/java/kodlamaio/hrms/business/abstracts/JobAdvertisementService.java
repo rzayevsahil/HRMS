@@ -8,7 +8,7 @@ import kodlamaio.hrms.entities.concretes.JobAdvert;
 
 public interface JobAdvertisementService {
 
-	DataResult<List<JobAdvert>> getAll();
+	/*DataResult<List<JobAdvert>> getAll();
 	
 	Result add(JobAdvert jobAdvertisement);
 	
@@ -18,5 +18,5 @@ public interface JobAdvertisementService {
 
 	DataResult<List<JobAdvert>> getByisActiveTrueAndEmployerId(int id);
 
-	DataResult<List<JobAdvert>> findAllByIsActiveTrue();
+	DataResult<List<JobAdvert>> findAllByIsActiveTrue();*/
 }

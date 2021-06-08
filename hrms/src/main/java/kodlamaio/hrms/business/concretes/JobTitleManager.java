@@ -24,37 +24,31 @@ public class JobTitleManager implements JobTitleService {
 		this.jobTitleDao = jobTitleDao;
 	}
 
-	@Override
+	/*@Override
 	public DataResult<List<JobPosition>> getAll() {
 		return new SuccessDataResult<List<JobPosition>>(this.jobTitleDao.findAll(),"Data listelendi");
 	}
 
 	@Override
 	public Result add(JobPosition jobTitle) {
-		Result result=BusinessRules.run(nullControl(jobTitle),titleRepeatControl(jobTitle));
+		Result result=BusinessRules.run(titleRepeatControl(jobTitle));
 		if (result.isSuccess()) {
 			this.jobTitleDao.save(jobTitle);
 			return new SuccessResult("Başarıyla eklendi");
 		}
 		return result;
 		
-	}
+	}*/
 	
 	
 	//******************************************* KURALLAR *******************************************
 	
-	private Result nullControl(JobPosition jobTitle) {
-		if(jobTitle.getTitle()==null || jobTitle.getTitle().isEmpty()) {
-			return new ErrorResult("Alanlar boş bırakılamaz");
-		}
-		return new SuccessResult();
-	}
 	
-	private Result titleRepeatControl(JobPosition jobTitle) {
+	/*private Result titleRepeatControl(JobPosition jobTitle) {
 		if(jobTitleDao.findAllByTitle(jobTitle.getTitle()).stream().count()!=0) {
 			return new ErrorResult("Bu pozisyon mevcut");
 		}
 		return new SuccessResult();
-	}
+	}*/
 
 }

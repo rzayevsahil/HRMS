@@ -24,7 +24,7 @@ public class EmployerManager implements EmployerService {
 		this.employerDao = employerDao;
 	}
 
-	@Override
+	/*@Override
 	public DataResult<List<Employer>> getAll() {
 
 		return new SuccessDataResult<List<Employer>>(this.employerDao.findAll(), "Data listelendi");
@@ -40,29 +40,29 @@ public class EmployerManager implements EmployerService {
 			return new SuccessResult("eklendi");
 		}
 		return result;
-	}
+	}*/
 
 	
 	//******************************************* KURALLAR *******************************************
 	
 
-	private Result emailExist(String email) {
+	/*private Result emailExist(String email) {
 		if (employerDao.findAllByEmail(email).stream().count() != 0) {
 			return new ErrorResult("bu email mevcut");
 		}
 		return new SuccessResult();
-	}
+	}*/
 
-	private Result nullControl(Employer employer) {
+	/*private Result nullControl(Employer employer) {
 		if (employer.getEmail().equals("") || employer.getPassword().isEmpty()
 				|| employer.getCompanyName().equals("") || employer.getWebAddress().equals("")) {
 
 			return new ErrorResult("bu alanlar boş bırakılamaz");
 		}
 		return new SuccessResult();
-	}   
+	}   */
 
-	private Result checkIfEqualEmailAndDomain(String email, String website) {
+	/*private Result checkIfEqualEmailAndDomain(String email, String website) {
 
 		String[] emailArr = email.split("@", 2); // @ gördüğünde böler 2 ayrı parçaya ve dizide tuttuk
 		String domain = website.substring(4, website.length()); // 4. karakterden başlayıp website uzunluğu kadar alır
@@ -73,5 +73,5 @@ public class EmployerManager implements EmployerService {
 		}
 		return new ErrorResult("Domain hatalı");
 	}
-
+*/
 }
