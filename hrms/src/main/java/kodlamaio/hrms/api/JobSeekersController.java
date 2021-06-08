@@ -59,7 +59,7 @@ public class JobSeekersController {
 	public ResponseEntity<?> delete(@Valid @RequestParam int id) {
 		return ResponseEntity.ok(jobseekerService.delete(id));
 	}
-	
+	 
 	@GetMapping("getById")
 	public DataResult<JobSeeker> getJobseekerByNationalId(@RequestParam int id){
 		return jobseekerService.getById(id);
