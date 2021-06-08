@@ -1,8 +1,6 @@
 package kodlamaio.hrms.entities.concretes;
 
-import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -58,9 +56,9 @@ public class JobSeeker extends User {
 	@OneToMany(mappedBy = "jobSeeker")	
 	private List<LanguageForCv> languages;
 	
-	/*@JsonIgnore
+	@JsonIgnore
 	@OneToOne(mappedBy = "jobSeeker", optional=false, fetch=FetchType.LAZY)
-	private ImageForCv image;*/
+	private ImageForCv image;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="jobSeeker")	
