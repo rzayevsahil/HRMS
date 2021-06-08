@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,12 +35,13 @@ public class User {
 	@Column(name="email")
 	@Email
 	@NotBlank
-	@NotNull
+	@NotNull(message="Email can not be null")
 	private String email;
 	
 	@Column(name="password")
 	@NotBlank
-	@NotNull	
+	@NotNull(message="Password can not be null")
+	@Size(min=6,message = "Şifre en az 6 karakter olucak")
 	private String password;	
 
 	@Column(name= "created_at", columnDefinition = "Date default CURRENT_DATE")
