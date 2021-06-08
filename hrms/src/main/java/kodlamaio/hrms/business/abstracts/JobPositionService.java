@@ -8,9 +8,11 @@ import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.entities.concretes.JobPosition;
 
 
-public interface JobTitleService {
+public interface JobPositionService {
 	
-	/*DataResult<List<JobPosition>> getAll();
+	DataResult<List<JobPosition>> getAll();
 	
-	Result add(JobPosition jobTitle);*/
+	Result add(JobPosition jobTitle);
+	Result update(JobPosition jobTitle);
+	Result delete(int id);
 }

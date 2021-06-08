@@ -38,7 +38,7 @@ public class JobPosition {
 	@Column(name="job_title")
 	@NotNull(message="JobTitle can not be null")
 	@NotBlank
-	private String jobTitle;
+	private String jobPosition;
 	
 	@JsonIgnore
 	@Column(name= "created_at", columnDefinition = "Date default CURRENT_DATE")	
