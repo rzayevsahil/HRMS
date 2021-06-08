@@ -12,5 +12,5 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer> {
 
     List<JobAdvert> findAllByIsActiveTrue();
 
-    List<JobAdvert> getByIsActiveTrueAndEmployer_Id(int id);
+    List<JobAdvert> getByIsActiveTrueAndEmployer_Id(int id); 
 }
