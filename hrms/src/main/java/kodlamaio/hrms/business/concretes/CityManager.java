@@ -43,8 +43,12 @@ public class CityManager implements CityService{
 
 	@Override
 	public Result update(City city) {
-		this.cityDao.save(city);
-		return new SuccessResult("City updated");
+		Result result=BusinessRules.run(cityNameExists(city));
+		if (result.isSuccess()) {
+			this.cityDao.save(city);
+			return new SuccessResult("City updated");
+		}
+		return result;
 	}
 
 	@Override
