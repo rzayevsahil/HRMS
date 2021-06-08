@@ -50,13 +50,13 @@ public class JobAdvertsController {
 	}
 	
 	@PutMapping("update")
-	public ResponseEntity<?> update(@Valid @RequestParam int jobAdvertId,@RequestBody JobAdvert jobAdvertisement){
-		return ResponseEntity.ok(this.jobAdvertService.update(jobAdvertId, jobAdvertisement));
+	public ResponseEntity<?> update(@Valid @RequestBody JobAdvert jobAdvertisement){
+		return ResponseEntity.ok(this.jobAdvertService.update(jobAdvertisement));
 	}
 	
 	@DeleteMapping("delete")
-	public ResponseEntity<?> delete(@Valid @RequestBody JobAdvert jobAdvertisement){
-		return ResponseEntity.ok(this.jobAdvertService.add(jobAdvertisement));
+	public ResponseEntity<?> delete(@Valid @RequestParam int id){
+		return ResponseEntity.ok(this.jobAdvertService.delete(id));
 	}
 	
 	@GetMapping("getByIsActiveTrueOrderByDeadlineAsc")

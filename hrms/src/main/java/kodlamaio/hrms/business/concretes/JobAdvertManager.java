@@ -51,19 +51,15 @@ public class JobAdvertManager implements JobAdvertService {
 	}
 
 	@Override
-	public Result update(int jobAdvertisementId, JobAdvert jobAdvertisement) {
-Result result = BusinessRules.run(checkAplicationDeadline(jobAdvertisementId, jobAdvertisement));		
-		if(result.isSuccess()) {	
+	public Result update(JobAdvert jobAdvertisement) {
 			jobAdvertDao.save(jobAdvertisement);
-			return new SuccessResult("JobAdvert updated");			
-		}
-		return result;
+			return new SuccessResult("JobAdvert updated");	
 	}
 	
 	@Override
 	public Result delete(int jobAdvertId) {
 		this.jobAdvertDao.deleteById(jobAdvertId);
-		return new SuccessResult("JobAdvert updated");
+		return new SuccessResult("JobAdvert deleted");
 	}
 
 	@Override
@@ -107,7 +103,7 @@ Result result = BusinessRules.run(checkAplicationDeadline(jobAdvertisementId, jo
 		return new SuccessResult();
 	}
 
-private Result checkAplicationDeadline(int jobAdvertId, JobAdvert jobAdvert) {
+ 	/*private Result checkAplicationDeadline(int jobAdvertId, JobAdvert jobAdvert) {
 		
 		JobAdvert result = jobAdvertDao.findById(jobAdvertId).get();
 		
@@ -119,7 +115,7 @@ private Result checkAplicationDeadline(int jobAdvertId, JobAdvert jobAdvert) {
 			return new ErrorResult("İlanın tarihi geçmiş");
 		}
 		return new SuccessResult();
-	}
+	}*/
 
 
 }

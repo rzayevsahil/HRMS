@@ -52,7 +52,6 @@ public class JobAdvert {
 	@Column(name = "open_position_count")
 	@Min(value=1)
 	@NotNull(message="PositionCount can not be null")
-	@NotBlank
 	private int openPositionCount;
 
 	@Column(name = "deadline")

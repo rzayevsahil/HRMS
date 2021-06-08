@@ -12,7 +12,7 @@ public interface JobAdvertService {
 	
 	Result add(JobAdvert jobAdvertisement);
 	
-	Result update(int jobAdvertisementId , JobAdvert jobAdvertisement);
+	Result update(JobAdvert jobAdvertisement);
 	Result delete(int jobAdvertisementId);
 
 	DataResult<List<JobAdvert>> getByIsActiveTrueOrderByDeadlineAsc();
