@@ -16,6 +16,7 @@ import kodlamaio.hrms.dataAccess.abstracts.CityDao;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdvertDao;
 import kodlamaio.hrms.entities.concretes.JobAdvert;
+import kodlamaio.hrms.entities.dtos.JobAdvertDto;
 
 @Service
 public class JobAdvertManager implements JobAdvertService {
@@ -75,6 +76,11 @@ public class JobAdvertManager implements JobAdvertService {
 	public DataResult<List<JobAdvert>> findAllByIsActiveTrue() {
 		return new SuccessDataResult<List<JobAdvert>>(jobAdvertDao.findAllByIsActiveTrue());
 	}
+	
+	@Override
+	public DataResult<List<JobAdvertDto>> getJobAdvertDetails() {
+		return new SuccessDataResult<List<JobAdvertDto>>(this.jobAdvertDao.getJobAdvertDetails());
+	}
 
 	
 
@@ -100,7 +106,7 @@ public class JobAdvertManager implements JobAdvertService {
 			return new ErrorResult("Minimum maaş maximum maaştan büyük veya eşit olamaz");
 		}
 		return new SuccessResult();
-	}
+	}	
 
  	/*private Result checkAplicationDeadline(int jobAdvertId, JobAdvert jobAdvert) {
 		

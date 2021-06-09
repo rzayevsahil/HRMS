@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kodlamaio.hrms.business.abstracts.JobAdvertService;
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.entities.concretes.JobAdvert;
+import kodlamaio.hrms.entities.dtos.JobAdvertDto;
 
 @RestController
 @RequestMapping("/api/jobadverts/")
@@ -64,6 +65,11 @@ public class JobAdvertsController {
 	@GetMapping("findAllByIsActiveTrue")
 	public DataResult<List<JobAdvert>> findAllByIsActiveTrue(){
 		return this.jobAdvertService.findAllByIsActiveTrue();
+	}
+	
+	@GetMapping("getJobAdvertDetails")
+	public DataResult<List<JobAdvertDto>> getJobAdvertDetails(){
+		return this.jobAdvertService.getJobAdvertDetails();
 	}
 	
 }
