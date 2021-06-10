@@ -33,7 +33,7 @@ public class ImagesController {
 	}
 
 	@PostMapping("add")
-	public Result add(@RequestParam(value = "id") int id, @RequestParam(value = "imageFile") MultipartFile imageFile) {
+	public Result add(@RequestParam(value = "jobseekerId") int id, @RequestParam(value = "imageFile") MultipartFile imageFile) {
 		JobSeeker jobSeeker = this.jobSeekerService.getById(id).getData();
 		ImageForCv imageForCv = new ImageForCv();
 		imageForCv.setJobSeeker(jobSeeker);

@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 public class ExperienceForCv extends Base{
 
 	@Column(name = "workplace_name")
-	 @NotNull(message="Workplace can not be null")
+	@NotNull(message="Workplace can not be null")
     @NotBlank
     private String workplaceName;
 

@@ -1,6 +1,6 @@
 package kodlamaio.hrms.entities.concretes;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -54,7 +54,7 @@ public class JobSeeker extends User {
 	private List<LanguageForCv> languages;
 	
 	@JsonIgnore
-	@OneToOne(mappedBy = "jobSeeker", optional=false, fetch=FetchType.LAZY)
+	@OneToOne(mappedBy = "jobSeeker")
 	private ImageForCv image;
 	
 	@JsonIgnore
@@ -76,7 +76,7 @@ public class JobSeeker extends User {
 	@Column(name = "date_of_birth")
 	@NotNull(message="DateOfBirth can not be null")
 	@Past
-	private LocalDate dateOfBirthDate;
+	private LocalDateTime dateOfBirthDate;
 
 	@Column(name = "is_verified", columnDefinition = "boolean default false")
 	private boolean isVerified = false;

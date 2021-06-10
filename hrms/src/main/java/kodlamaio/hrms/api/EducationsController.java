@@ -36,7 +36,7 @@ public class EducationsController {
 	}
 	
 	@PutMapping("update")
-	public ResponseEntity<?> update( @Valid @RequestBody EducationForCv educationForCv) {
+	public ResponseEntity<?> update(@Valid @RequestBody EducationForCv educationForCv) {
 		return ResponseEntity.ok(this.educationForCvService.update(educationForCv));
 	}
 	
