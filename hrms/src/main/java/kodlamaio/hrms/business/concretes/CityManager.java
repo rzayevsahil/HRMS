@@ -35,6 +35,8 @@ public class CityManager implements CityService{
 	public Result add(City city) {
 		Result result=BusinessRules.run(cityNameExists(city));
 		if (result.isSuccess()) {
+			String cityNameUpperCase=city.getName().toUpperCase();
+			city.setName(cityNameUpperCase);
 			this.cityDao.save(city);
 			return new SuccessResult("City added");
 		}
