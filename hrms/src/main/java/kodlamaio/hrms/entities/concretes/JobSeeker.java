@@ -48,8 +48,7 @@ public class JobSeeker extends User {
 
 	@Column(name = "national_id",unique = true)
 	@NotNull(message = "NationalId cannot be null")
-	@Min(value = 11)
-	@Max(value = 11)
+	@Size(min = 11, max = 11, message = "NationalId must be 11 characters")
 	private String nationalId;
 
 	@JsonIgnore
