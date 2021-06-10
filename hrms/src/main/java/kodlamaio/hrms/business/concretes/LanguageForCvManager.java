@@ -30,7 +30,7 @@ public class LanguageForCvManager implements LanguageForCvService {
 	public Result add(LanguageForCv languageForCv) {
 		Result result=BusinessRules.run(languageExists(languageForCv));
 		if (result.isSuccess()) {
-			String languageUpperCase=languageForCv.getLanguage().toUpperCase();
+			String languageUpperCase=languageForCv.getLanguage().toLowerCase();
 			languageForCv.setLanguage(languageUpperCase);
 			this.languageForCvDao.save(languageForCv);
 			return new SuccessResult("Language added");
@@ -67,7 +67,7 @@ public class LanguageForCvManager implements LanguageForCvService {
 	
 	
 	private Result languageExists(LanguageForCv languageForCv) {
-		if(languageForCvDao.findAllByLanguage(languageForCv.getLanguage().toUpperCase()).stream().count()!=0) {
+		if(languageForCvDao.findAllByLanguage(languageForCv.getLanguage().toLowerCase()).stream().count()!=0) {
 			return new ErrorResult("This Language is available");
 		}
 		return new SuccessResult();
