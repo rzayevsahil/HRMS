@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.LanguageForCvService;
 import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.core.utilities.ErrorResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
+import kodlamaio.hrms.core.utilities.business.BusinessRules;
 import kodlamaio.hrms.dataAccess.abstracts.LanguageForCvDao;
 import kodlamaio.hrms.entities.concretes.LanguageForCv;
 
@@ -26,8 +28,14 @@ public class LanguageForCvManager implements LanguageForCvService {
 	
 	@Override
 	public Result add(LanguageForCv languageForCv) {
-		this.languageForCvDao.save(languageForCv);
-		return new SuccessResult("Language added");
+		Result result=BusinessRules.run(languageExists(languageForCv));
+		if (result.isSuccess()) {
+			String languageUpperCase=languageForCv.getLanguage().toUpperCase();
+			languageForCv.setLanguage(languageUpperCase);
+			this.languageForCvDao.save(languageForCv);
+			return new SuccessResult("Language added");
+		}
+		return result;
 	}
 
 	@Override
@@ -55,6 +63,14 @@ public class LanguageForCvManager implements LanguageForCvService {
 	@Override
 	public DataResult<List<LanguageForCv>> getAllByJobSeekerId(int id) {
 		return new SuccessDataResult<List<LanguageForCv>>(this.languageForCvDao.getAllByJobSeeker_id(id));
+	}
+	
+	
+	private Result languageExists(LanguageForCv languageForCv) {
+		if(languageForCvDao.findAllByLanguage(languageForCv.getLanguage().toUpperCase()).stream().count()!=0) {
+			return new ErrorResult("This Language is available");
+		}
+		return new SuccessResult();
 	}
 
 }
