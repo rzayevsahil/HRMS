@@ -12,18 +12,18 @@ CREATE TABLE public.cities
 
 CREATE TABLE public.cv_cover_letters
 (
-    id integer NOT NULL,
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     created_at date,
     is_active boolean,
     is_deleted boolean,
-    content character varying(255),
-    jobseeker_id integer,
+    content character varying(255) NOT NULL,
+    jobseeker_id integer NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE public.cv_experiences
 (
-    id integer NOT NULL,
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     created_at date,
     is_active boolean,
     is_deleted boolean,
@@ -37,19 +37,19 @@ CREATE TABLE public.cv_experiences
 
 CREATE TABLE public.cv_foreign_languages
 (
-    id integer NOT NULL,
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     created_at date,
     is_active boolean,
     is_deleted boolean,
-    language character varying(255),
-    level smallint,
-    jobseeker_id integer,
+    language character varying(255) NOT NULL,
+    level smallint NOT NULL,
+    jobseeker_id integer NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE public.cv_images
 (
-    id integer NOT NULL,
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     created_at date,
     is_active boolean,
     is_deleted boolean,
@@ -61,19 +61,19 @@ CREATE TABLE public.cv_images
 
 CREATE TABLE public.cv_links
 (
-    id integer NOT NULL,
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     created_at date,
     is_active boolean,
     is_deleted boolean,
     name character varying(255),
-    url character varying(255),
-    jobseeker_id integer,
+    url character varying(255) NOT NULL,
+    jobseeker_id integer NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE public.cv_schools
 (
-    id integer NOT NULL,
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     created_at date,
     is_active boolean,
     is_deleted boolean,
@@ -81,18 +81,18 @@ CREATE TABLE public.cv_schools
     graduation_year integer,
     school_name character varying(255),
     start_year integer,
-    jobseeker_id integer,
+    jobseeker_id integer NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE public.cv_skills
 (
-    id integer NOT NULL,
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     created_at date,
     is_active boolean,
     is_deleted boolean,
-    name character varying(255),
-    job_seeker_id integer,
+    name character varying(255) NOT NULL,
+    job_seeker_id integer NOT NULL,
     PRIMARY KEY (id)
 );
 
