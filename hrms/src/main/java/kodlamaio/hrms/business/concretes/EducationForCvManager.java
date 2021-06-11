@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.EducationForCvService;
 import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.core.utilities.ErrorResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
+import kodlamaio.hrms.core.utilities.business.BusinessRules;
 import kodlamaio.hrms.dataAccess.abstracts.EducationForCvDao;
 import kodlamaio.hrms.entities.concretes.EducationForCv;
 
@@ -27,14 +29,22 @@ private EducationForCvDao educationForCvDao;
 	
 	@Override
 	public Result add(EducationForCv educationForCv) {
-		this.educationForCvDao.save(educationForCv);
-		return new SuccessResult("Education added");
+		Result result=BusinessRules.run(startGreatThanGraduationControl(educationForCv));
+		if (result.isSuccess()) {
+			this.educationForCvDao.save(educationForCv);
+			return new SuccessResult("Education added");
+		}
+		return result;
 	}
 
 	@Override
 	public Result update(EducationForCv educationForCv) {
-		this.educationForCvDao.save(educationForCv);
-		return new SuccessResult("Education updated");
+		Result result=BusinessRules.run(startGreatThanGraduationControl(educationForCv));
+		if (result.isSuccess()) {
+			this.educationForCvDao.save(educationForCv);
+			return new SuccessResult("Education updated");
+		}
+		return result;
 	}
 
 	@Override
@@ -61,6 +71,15 @@ private EducationForCvDao educationForCvDao;
 	@Override
 	public DataResult<List<EducationForCv>> getAllByJobSeekerId(int id) {
 		return new SuccessDataResult<List<EducationForCv>>(this.educationForCvDao.getAllByJobSeeker_id(id));
+	}
+	
+	//********************* KURALLAR ***************************
+	
+	private Result startGreatThanGraduationControl(EducationForCv educationForCv) {
+		if (educationForCv.getGraduationYear()!=0 && educationForCv.getStartYear()>=educationForCv.getGraduationYear()) {
+			return new ErrorResult("StartYear can not be large from GraduationYear");
+		}
+		return new SuccessResult();
 	}
 
 }

@@ -35,7 +35,7 @@ public class EducationForCv extends Base{
 	 private int startYear;
 
 	 @Column(name = "graduation_year",nullable=true)
-	 @Min(1950)
+	 //@Min(1950)
 	 private int graduationYear;
 
 	//@JsonIgnore()
