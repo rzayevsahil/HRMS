@@ -72,6 +72,10 @@ public class JobSeeker extends User {
 	@OneToMany(mappedBy="jobSeeker")
 	private List<CoverLetterForCv> coverLetters;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "jobSeeker")	
+	private List<LinkForCv> links;
+	
 	@Column(name = "date_of_birth")
 	@NotNull(message="DateOfBirth can not be null")
 	@Past

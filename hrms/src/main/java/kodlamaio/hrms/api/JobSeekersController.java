@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kodlamaio.hrms.business.abstracts.JobSeekerService;
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
+import kodlamaio.hrms.entities.dtos.JobSeekerCvDto;
 
 @RestController
 @RequestMapping("/api/jobseekers/")
@@ -55,6 +56,11 @@ public class JobSeekersController {
 	@GetMapping("getById")
 	public DataResult<JobSeeker> getJobseekerByNationalId(@RequestParam int id){
 		return jobseekerService.getById(id);
+	}
+	
+	@GetMapping("getJobseekerCVById")
+	public DataResult<JobSeekerCvDto> getJobseekerCVById(@RequestParam int id){
+		return this.jobseekerService.getJobseekerCVById(id);
 	}
 	
 }
