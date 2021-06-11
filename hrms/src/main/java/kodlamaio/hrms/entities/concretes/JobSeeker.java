@@ -75,7 +75,7 @@ public class JobSeeker extends User {
 	@Column(name = "date_of_birth")
 	@NotNull(message="DateOfBirth can not be null")
 	@Past
-	private LocalDateTime dateOfBirthDate;
+	private LocalDateTime dateOfBirthDate; 
 
 	@Column(name = "is_verified", columnDefinition = "boolean default false")
 	private boolean isVerified = false;
