@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,6 +36,7 @@ public class ExperienceForCv extends Base{
 
     @Column(name = "start_date")
     @NotNull(message="StartDate can not be null")
+    @Past
     private LocalDate startDate;
 
     @Column(name = "leave_date")
