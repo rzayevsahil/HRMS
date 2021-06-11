@@ -75,7 +75,7 @@ public class ExperienceForCvManager implements ExperienceForCvService {
 	//*********************** KURALLAR *******************************
 	
 	private Result startDateGreatThanLeaveDateControl(ExperienceForCv experienceForCv) {
-		if(experienceForCv.getLeaveDate()==null) {
+		if(experienceForCv.getLeaveDate().toString()=="yyyy-MM-dd") {
 			experienceForCv.setLeaveDate(null);	
 			return new SuccessResult();
 		}
