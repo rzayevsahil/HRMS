@@ -31,15 +31,19 @@ public class ExperienceForCvManager implements ExperienceForCvService {
 		Result result=BusinessRules.run(startDateGreatThanLeaveDateControl(experienceForCv));
 		if (result.isSuccess()) {
 			this.experienceForCvDao.save(experienceForCv);
-			return new SuccessResult("Experience added");
+			return new SuccessResult("Experience added");			
 		}
 		return result;
 	}
 
 	@Override
 	public Result update(ExperienceForCv experienceForCv) {
-		this.experienceForCvDao.save(experienceForCv);
-		return new SuccessResult("Experience updated");
+		Result result=BusinessRules.run(startDateGreatThanLeaveDateControl(experienceForCv));
+		if (result.isSuccess()) {
+			this.experienceForCvDao.save(experienceForCv);
+			return new SuccessResult("Experience updated");
+		}
+		return result;
 	}
 
 	@Override
@@ -71,7 +75,11 @@ public class ExperienceForCvManager implements ExperienceForCvService {
 	//*********************** KURALLAR *******************************
 	
 	private Result startDateGreatThanLeaveDateControl(ExperienceForCv experienceForCv) {
-		if (experienceForCv.getStartDate().isAfter(experienceForCv.getLeaveDate())) {
+		if(experienceForCv.getLeaveDate()==null) {
+			experienceForCv.setLeaveDate(null);	
+			return new SuccessResult();
+		}
+		else if (experienceForCv.getStartDate().isAfter(experienceForCv.getLeaveDate())) {
 			return new ErrorResult("Start_Date cannot be large from Leave_Date");			
 		}
 		return new SuccessResult();
