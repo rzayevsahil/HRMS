@@ -63,7 +63,6 @@ public class JobAdvert {
 	private LocalDateTime deadline;
 	
 	@Column(name = "published_at")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@NotNull(message="PublishedAt can not be null")
 	private LocalDateTime publishedAt;
 
