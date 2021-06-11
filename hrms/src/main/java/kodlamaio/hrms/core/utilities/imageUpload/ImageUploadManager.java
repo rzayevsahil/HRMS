@@ -26,6 +26,7 @@ public class ImageUploadManager implements ImageUploadService{
 				"api_secret", "D3xC8y-f_ABgrkF-m_e695XyhEQ"));
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	public DataResult<Map> uploadImageFile(MultipartFile imageFile) {
 		try {

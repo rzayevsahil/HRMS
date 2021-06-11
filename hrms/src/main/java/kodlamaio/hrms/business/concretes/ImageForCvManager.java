@@ -29,6 +29,7 @@ public class ImageForCvManager implements ImageForCvService {
 		this.imageUploadService = imageUploadService;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Result add(ImageForCv imageForCv, MultipartFile imageFile) {
 		Map<String,String> uploadImage = this.imageUploadService.uploadImageFile(imageFile).getData();

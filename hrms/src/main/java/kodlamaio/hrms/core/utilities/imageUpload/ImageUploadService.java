@@ -8,5 +8,6 @@ import kodlamaio.hrms.core.utilities.DataResult;
 
 public interface ImageUploadService {
 
+	@SuppressWarnings("rawtypes")
 	DataResult<Map> uploadImageFile(MultipartFile imageFile);
 }
