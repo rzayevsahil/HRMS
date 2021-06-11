@@ -32,7 +32,7 @@ public class ImageForCv extends Base{
 	 private LocalDateTime uploadedAt;
 
 	//@JsonIgnore()
-	 @OneToOne(optional=false,fetch=FetchType.LAZY)	 
+	 @OneToOne()	 
 	 @JoinColumn(name = "jobseeker_id",referencedColumnName="user_id")
 	 private JobSeeker jobSeeker;
 	

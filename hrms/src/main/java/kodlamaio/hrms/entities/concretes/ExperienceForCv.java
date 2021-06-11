@@ -35,7 +35,6 @@ public class ExperienceForCv extends Base{
 
     @Column(name = "start_date")
     @NotNull(message="StartDate can not be null")
-    @NotBlank
     private LocalDate startDate;
 
     @Column(name = "leave_date")

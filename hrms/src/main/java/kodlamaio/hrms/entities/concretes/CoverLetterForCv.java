@@ -30,7 +30,7 @@ public class CoverLetterForCv extends Base{
 		this.jobSeeker.setId(jobseekerId);
 	}
 
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "jobseeker_id")	
 	private JobSeeker jobSeeker;

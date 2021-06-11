@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.ExperienceForCvService;
 import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.core.utilities.ErrorResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
+import kodlamaio.hrms.core.utilities.business.BusinessRules;
 import kodlamaio.hrms.dataAccess.abstracts.ExperienceForCvDao;
 import kodlamaio.hrms.entities.concretes.ExperienceForCv;
 
@@ -26,8 +28,12 @@ public class ExperienceForCvManager implements ExperienceForCvService {
 	
 	@Override
 	public Result add(ExperienceForCv experienceForCv) {
-		this.experienceForCvDao.save(experienceForCv);
-		return new SuccessResult("Experience added");
+		Result result=BusinessRules.run(startDateGreatThanLeaveDateControl(experienceForCv));
+		if (result.isSuccess()) {
+			this.experienceForCvDao.save(experienceForCv);
+			return new SuccessResult("Experience added");
+		}
+		return result;
 	}
 
 	@Override
@@ -60,6 +66,15 @@ public class ExperienceForCvManager implements ExperienceForCvService {
 	@Override
 	public DataResult<List<ExperienceForCv>> getAllByJobSeekerId(int id) {
 		return new SuccessDataResult<List<ExperienceForCv>>(this.experienceForCvDao.getAllByJobSeeker_id(id));
+	}
+	
+	//*********************** KURALLAR *******************************
+	
+	private Result startDateGreatThanLeaveDateControl(ExperienceForCv experienceForCv) {
+		if (experienceForCv.getStartDate().isAfter(experienceForCv.getLeaveDate())) {
+			return new ErrorResult("Start_Date cannot be large from Leave_Date");			
+		}
+		return new SuccessResult();
 	}
 
 }
