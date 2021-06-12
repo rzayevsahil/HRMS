@@ -76,7 +76,9 @@ private EducationForCvDao educationForCvDao;
 	//********************* KURALLAR ***************************
 	
 	private Result startGreatThanGraduationControl(EducationForCv educationForCv) {
-		if (educationForCv.getGraduationYear()!=0 && educationForCv.getStartYear()>=educationForCv.getGraduationYear()) {
+		if (educationForCv.getGraduationYear()==null) {
+			return new SuccessResult();
+		} else if (educationForCv.getGraduationYear().isBefore(educationForCv.getStartYear())) {
 			return new ErrorResult("StartYear can not be large from GraduationYear");
 		}
 		return new SuccessResult();

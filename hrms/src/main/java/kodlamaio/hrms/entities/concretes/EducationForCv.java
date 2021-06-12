@@ -1,11 +1,12 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -31,12 +32,10 @@ public class EducationForCv extends Base{
 
 	 @Column(name = "start_year")
 	 @NotNull(message="StartYear can not be null")
-	 @Min(1950)
-	 private int startYear;
+	 private LocalDate startYear;
 
 	 @Column(name = "graduation_year",nullable=true)
-	 //@Min(1950)
-	 private int graduationYear;
+	 private LocalDate graduationYear;
 
 	//@JsonIgnore()
 	 @ManyToOne()	 
