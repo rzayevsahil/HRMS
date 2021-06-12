@@ -1,11 +1,19 @@
+# HRMS
+## *Human Resources Management System - Backend*
+
+<img src="https://user-images.githubusercontent.com/58303745/121785903-9c8aac00-cbcd-11eb-9b7c-91dfc9874bc0.png" />
+
+---
+
 
 # HRMS
-*Human Resources Management System (Database)*
+## *Database image*
 
-![hrms](https://user-images.githubusercontent.com/58303745/121084809-27486100-c7f2-11eb-9ac8-be978d6cd10a.png)
+<img src="https://user-images.githubusercontent.com/58303745/121084809-27486100-c7f2-11eb-9ac8-be978d6cd10a.png" width="80%" />
 
-### *Backend - Swagger'da Görüntüsü*    
-![Swagger](https://user-images.githubusercontent.com/58303745/121781935-2760ac00-cbb8-11eb-9281-43f32ebe62c9.png)
+## *Backend - Swagger'da Görüntüsü*    
+
+<img src="https://user-images.githubusercontent.com/58303745/121781935-2760ac00-cbb8-11eb-9281-43f32ebe62c9.png" width="80%" />
 
 
 ## Kullanılan Teknolojiler 
