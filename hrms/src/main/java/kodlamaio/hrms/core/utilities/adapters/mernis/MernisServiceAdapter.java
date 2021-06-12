@@ -1,25 +1,27 @@
 package kodlamaio.hrms.core.utilities.adapters.mernis;
 
-import java.time.LocalDateTime;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.mernisService.FakeMernisService;
 
 @Service
-public class MernisServiceAdapter implements UserCheckService {
+public class MernisServiceAdapter implements MernisService {
+	
+	@Autowired
+	FakeMernisService client= new FakeMernisService();
 	
 	@Override
 	public boolean checkIfRealPerson(String nationalityId, String firstName, String lastName,
-			LocalDateTime dateOfBirth) {
-
-		FakeMernisService client= new FakeMernisService();
+			int dateOfBirth) {		
 		
 		boolean result = client.TCKimlikDogrula(nationalityId, firstName, lastName, dateOfBirth);
 		
-
 		return result;
 	}
+
+	
 
 
 
