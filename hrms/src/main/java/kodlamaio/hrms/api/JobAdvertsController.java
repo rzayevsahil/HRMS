@@ -40,7 +40,7 @@ public class JobAdvertsController {
 	@PostMapping("add")
 	public ResponseEntity<?> add(@Valid @RequestBody JobAdvert jobAdvertisement){
 		return ResponseEntity.ok(this.jobAdvertService.add(jobAdvertisement));
-	}
+	} 
 	
 	@PutMapping("update")
 	public ResponseEntity<?> update(@Valid @RequestBody JobAdvert jobAdvertisement){
