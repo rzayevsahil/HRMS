@@ -1,5 +1,7 @@
 package kodlamaio.hrms.api;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,13 +25,13 @@ public class AuthsController {
 	}
 	
 	@PostMapping("/registerEmployer")
-	public Result registerEmpolyer(@RequestBody Employer employer, String confirmPassword)
+	public Result registerEmpolyer(@Valid @RequestBody Employer employer, String confirmPassword)
 	{
 		return authService.registerEmployer(employer, confirmPassword);
 	}
 	
 	@PostMapping("/registerJobseeker")
-	public Result registerJobseeker(@RequestBody JobSeeker jobseeker, String confirmPassword)
+	public Result registerJobseeker(@Valid @RequestBody JobSeeker jobseeker, String confirmPassword)
 	{
 		return authService.registerJobseeker(jobseeker, confirmPassword);
 	}
