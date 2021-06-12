@@ -1,8 +1,11 @@
 
 # HRMS
-Human Resources Management System
+*Human Resources Management System (Database)*
 
 ![hrms](https://user-images.githubusercontent.com/58303745/121084809-27486100-c7f2-11eb-9ac8-be978d6cd10a.png)
+
+### *Backend - Swagger'da Görüntüsü*    
+![Swagger](https://user-images.githubusercontent.com/58303745/121781935-2760ac00-cbb8-11eb-9281-43f32ebe62c9.png)
 
 
 ## Kullanılan Teknolojiler 
@@ -41,10 +44,6 @@ Human Resources Management System
 <img src="https://user-images.githubusercontent.com/74687192/120887527-1504d200-c5fc-11eb-958f-79266c3a93fa.png" width="15%" height="15%" />
 
 ---
-
-### Backend - Görüntü    
-![Swagger](https://user-images.githubusercontent.com/58303745/121781935-2760ac00-cbb8-11eb-9281-43f32ebe62c9.png)
-
 
 ## Projemi Geliştirirken Faydalandığım linkler 
 ---
