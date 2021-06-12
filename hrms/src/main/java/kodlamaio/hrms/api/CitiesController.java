@@ -21,7 +21,7 @@ import kodlamaio.hrms.entities.concretes.City;
 
 @RestController
 @RequestMapping(name="/api/cities/")
-public class CitiesController {
+public class CitiesController { 
 
 	private CityService cityService;
 
