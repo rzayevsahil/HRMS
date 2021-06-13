@@ -20,7 +20,7 @@ import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.entities.concretes.City;
 
 @RestController
-@RequestMapping(name="/api/cities/")
+@RequestMapping("/api/cities/")
 public class CitiesController { 
 
 	private CityService cityService;
