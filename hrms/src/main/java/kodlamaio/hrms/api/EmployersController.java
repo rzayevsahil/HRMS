@@ -20,7 +20,7 @@ import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.entities.concretes.Employer;
 
 @RestController
-@RequestMapping(name="/api/employers/")
+@RequestMapping("/api/employers/")
 public class EmployersController {
  
 	private EmployerService employerService;
