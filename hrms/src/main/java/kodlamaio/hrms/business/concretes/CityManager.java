@@ -55,7 +55,7 @@ public class CityManager implements CityService{
 
 	@Override
 	public Result delete(int cityId) {
-			this.cityDao.deleteById(cityId);;
+			this.cityDao.deleteById(cityId);
 			return new SuccessResult("City deleted");		
 	}
 	
