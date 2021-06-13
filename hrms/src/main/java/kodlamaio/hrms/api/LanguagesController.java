@@ -20,7 +20,7 @@ import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.entities.concretes.LanguageForCv;
 
 @RestController
-@RequestMapping("api/languages/")
+@RequestMapping("/api/languages/")
 public class LanguagesController {
 
 	private LanguageForCvService languageForCvService;
