@@ -12,7 +12,10 @@ public interface JobPositionService {
 	
 	DataResult<List<JobPosition>> getAll();
 	
-	Result add(JobPosition jobTitle);
-	Result update(JobPosition jobTitle);
+	Result add(JobPosition jobPosition);
+	Result update(JobPosition jobPosition);
 	Result delete(int id);
+	
+	DataResult<JobPosition> getById(int id);
+	DataResult<JobPosition> getJobByTitle(String title);
 }

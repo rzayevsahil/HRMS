@@ -11,9 +11,21 @@ public interface JobAdvertService {
 
 	DataResult<List<JobAdvert>> getAll();
 	
-	Result add(JobAdvert jobAdvertisement);	
-	Result update(JobAdvert jobAdvertisement);
-	Result delete(int jobAdvertisementId);
+	Result add(JobAdvert jobAdvert);	
+	Result update(JobAdvert jobAdvert);
+	Result delete(int jobAdvertId);
+	
+	Result changeIsActiveByEmployee(int jobAdvertId);	
+	Result changeIsOpenByEmployer(int jobAdvertId);
+	
+	DataResult<List<JobAdvert>> getAllByIsActiveByEmployee();// iş arayan	
+	DataResult<List<JobAdvert>> getAllByIsActiveByEmployee_False();// admin
+	
+	DataResult<JobAdvert> getById(int id);	
+	DataResult<List<JobAdvert>> getAllOpenJobAdvertList();
+	DataResult<List<JobAdvert>> findAllByOrderByPublishedAt();
+	DataResult<List<JobAdvert>> getAllOpenJobAdvertByEmployer(int id);
+	DataResult<List<JobAdvert>> getAllByEmployerId(int employerId);
 
 	DataResult<List<JobAdvert>> getByIsActiveTrueOrderByDeadlineAsc();
 

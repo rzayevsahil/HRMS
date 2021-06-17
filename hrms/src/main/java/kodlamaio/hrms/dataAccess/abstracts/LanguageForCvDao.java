@@ -11,4 +11,5 @@ public interface LanguageForCvDao extends JpaRepository<LanguageForCv, Integer> 
 	LanguageForCv getById(int id);
 	List<LanguageForCv> getAllByJobSeeker_id(int id);
 	List<LanguageForCv> findAllByLanguage(String language);
+	LanguageForCv findUserByLanguage(String language);
 }

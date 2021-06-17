@@ -10,12 +10,10 @@ public interface UserService {
 	
 	DataResult<List<User>> getAll();
 	
-	Result add(User user);
+	Result add(User user);	
+	Result update(User user);
+	Result delete(int id);
 	
-	//Result update(User user);
-	//Result delete(int id);
-	
-	//DataResult<User> getById(int id);
-	
+	DataResult<User> getById(int id);	
 	DataResult<User> getUserByEmail(String email);
 }
