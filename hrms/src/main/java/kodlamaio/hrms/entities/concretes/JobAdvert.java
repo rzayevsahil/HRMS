@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
@@ -98,4 +99,8 @@ public class JobAdvert {
 	@ManyToOne
 	@JoinColumn(name="work_type_id")
 	private WorkType workType;
+	
+	@OneToOne(mappedBy="jobAdvert")
+	@JsonIgnore
+	private JobAdvertConfirmation jobAdvertConfirmation;
 }
