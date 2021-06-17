@@ -65,4 +65,9 @@ public class JobSeekersController {
 		return this.jobseekerService.getJobseekerCVById(id);
 	}
 	
+	@GetMapping("getbyid")
+	public DataResult<JobSeeker> getById(@RequestParam int id) {
+		return this.jobseekerService.getById(id);
+	}
+	
 }

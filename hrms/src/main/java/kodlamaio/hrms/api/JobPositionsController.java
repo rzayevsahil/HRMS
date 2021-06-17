@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,6 +52,11 @@ public class JobPositionsController {
 	@DeleteMapping("delete")
 	public ResponseEntity<?> delete(@Valid @RequestParam int id){
 		return ResponseEntity.ok(this.jobPositionService.delete(id));
+	}
+	
+	@GetMapping("/getbyid")
+	public DataResult<JobPosition> getById(@PathVariable("id") int id){
+		return this.jobPositionService.getById(id);
 	}
 	
 }

@@ -33,11 +33,12 @@ public class ExperiencesController {
 		this.experienceForCvService = experienceForCvService;
 	}
 	
+	
+	
 	@PostMapping("add")
 	public ResponseEntity<?> add(@Valid @RequestBody ExperienceForCv experienceForCv) {
 		return ResponseEntity.ok(this.experienceForCvService.add(experienceForCv));
 	}
-	
 	
 	
 	@PutMapping("update")
@@ -49,10 +50,12 @@ public class ExperiencesController {
 	 public ResponseEntity<?> delete(@RequestParam("id") int id) {
 		 return ResponseEntity.ok(this.experienceForCvService.delete(id));
 	 }
+	 
 	 @GetMapping("getbyid")
 	 public DataResult<ExperienceForCv> getById(@RequestParam int id){
 		 return this.experienceForCvService.getById(id);
 	 }
+	 
 	 @GetMapping("getAllByJobSeekerIdOrderByLeaveAtDesc")
 	 public DataResult<List<ExperienceForCv>> getAllByJobSeekerIdOrderByLeaveArDesc(@RequestParam("id") int id){
 		 return this.experienceForCvService.getAllByJobSeekerIdOrderByLeaveDateDesc(id);

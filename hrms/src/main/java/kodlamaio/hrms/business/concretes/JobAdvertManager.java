@@ -107,7 +107,7 @@ public class JobAdvertManager implements JobAdvertService {
 	public Result add(JobAdvertDetailDto jobAdvertDetailDto) {
 		
 		JobAdvert jobAdvert = new JobAdvert();
-		jobAdvert.setCity(this.cityDao.GetById(jobAdvertDetailDto.getCityId()));
+		jobAdvert.setCity(this.cityDao.getById(jobAdvertDetailDto.getCityId()));
 		jobAdvert.setJobPosition(this.jobPositionDao.getById(jobAdvertDetailDto.getJobPositionId()));
 		jobAdvert.setWorkHour(this.workHourDao.getById(jobAdvertDetailDto.getWorkHourId()));
 		jobAdvert.setWorkType(this.workTypeDao.getById(jobAdvertDetailDto.getWorkTypeId()));
@@ -115,7 +115,7 @@ public class JobAdvertManager implements JobAdvertService {
 		jobAdvert.setSalaryMax(jobAdvertDetailDto.getMaxSalary());
 		jobAdvert.setSalaryMin(jobAdvertDetailDto.getMinSalary());
 		jobAdvert.setOpenPositionCount(jobAdvertDetailDto.getOpenPositionCount());
-		jobAdvert.setEmployer(this.employerDao.GetById(jobAdvertDetailDto.getEmployerId()));
+		jobAdvert.setEmployer(this.employerDao.getById(jobAdvertDetailDto.getEmployerId()));
 		jobAdvert.setDeadline(jobAdvertDetailDto.getDeadLine());
 	
 		
