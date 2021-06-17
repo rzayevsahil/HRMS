@@ -59,6 +59,12 @@ public class CityManager implements CityService{
 			return new SuccessResult("City deleted");		
 	}
 	
+	@Override
+	public DataResult<City> getById(int id) {
+		return new SuccessDataResult<City>(this.cityDao.getOne(id));
+	}
+
+	
 	//********************** Kurallar *****************************
 	
 	private Result cityNameExists(City city) {
@@ -67,5 +73,5 @@ public class CityManager implements CityService{
 		}
 		return new SuccessResult();
 	}
-
+	
 }

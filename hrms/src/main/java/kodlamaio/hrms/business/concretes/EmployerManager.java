@@ -59,6 +59,11 @@ public class EmployerManager implements EmployerService {
 		return new SuccessResult("Employer deleted");
 	}
 
+	@Override
+	public DataResult<Employer> getById(int id) {
+		return new SuccessDataResult<Employer>(this.employerDao.getOne(id));
+	}
+
 	
 	//******************************************* KURALLAR *******************************************
 	

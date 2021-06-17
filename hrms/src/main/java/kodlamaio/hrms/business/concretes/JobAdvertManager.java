@@ -14,10 +14,13 @@ import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.core.utilities.business.BusinessRules;
 import kodlamaio.hrms.dataAccess.abstracts.CityDao;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
+import kodlamaio.hrms.dataAccess.abstracts.JobAdvertConfirmationDao;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdvertDao;
+import kodlamaio.hrms.dataAccess.abstracts.JobPositionDao;
 import kodlamaio.hrms.dataAccess.abstracts.WorkHourDao;
 import kodlamaio.hrms.dataAccess.abstracts.WorkTypeDao;
 import kodlamaio.hrms.entities.concretes.JobAdvert;
+import kodlamaio.hrms.entities.dtos.JobAdvertDetailDto;
 import kodlamaio.hrms.entities.dtos.JobAdvertDto;
 
 @Service
@@ -28,27 +31,32 @@ public class JobAdvertManager implements JobAdvertService {
 	private CityDao cityDao;
 	private WorkTypeDao workTypeDao;
 	private WorkHourDao workHourDao;
+	private JobPositionDao jobPositionDao;
+	private JobAdvertConfirmationDao jobAdvertConfirmationDao;
 
 	@Autowired
 	public JobAdvertManager(JobAdvertDao jobAdvertDao, EmployerDao employerDao, CityDao cityDao,
-			WorkTypeDao workTypeDao, WorkHourDao workHourDao) {
+			WorkTypeDao workTypeDao, WorkHourDao workHourDao, JobPositionDao jobPositionDao,
+			JobAdvertConfirmationDao jobAdvertConfirmationDao) {
 		super();
 		this.jobAdvertDao = jobAdvertDao;
 		this.employerDao = employerDao;
 		this.cityDao = cityDao;
 		this.workTypeDao = workTypeDao;
 		this.workHourDao = workHourDao;
+		this.jobPositionDao = jobPositionDao;
+		this.jobAdvertConfirmationDao = jobAdvertConfirmationDao;
 	}
 
-	
+
 	
 	@Override
 	public DataResult<List<JobAdvert>> getAll() {
-		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAll(),"data listelendi");
+		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAll(),"Data listelendi");
 	}
 
 	@Override
-	public Result add(JobAdvert jobAdvertisement) {
+	public Result Add(JobAdvert jobAdvertisement) {
 		Result result = BusinessRules.run( employerControl(jobAdvertisement.getEmployer().getId()),
 				cityControl(jobAdvertisement.getCity().getId()),				
 				salaryControl(jobAdvertisement));		
@@ -90,6 +98,110 @@ public class JobAdvertManager implements JobAdvertService {
 	public DataResult<List<JobAdvertDto>> getJobAdvertDetails() {
 		return new SuccessDataResult<List<JobAdvertDto>>(this.jobAdvertDao.getJobAdvertDetails());
 	}
+	
+	
+	
+	//----------------------------------------------------------------------------------------------------------
+	
+	@Override
+	public Result add(JobAdvertDetailDto jobAdvertDetailDto) {
+		
+		JobAdvert jobAdvert = new JobAdvert();
+		jobAdvert.setCity(this.cityDao.GetById(jobAdvertDetailDto.getCityId()));
+		jobAdvert.setJobPosition(this.jobPositionDao.getById(jobAdvertDetailDto.getJobPositionId()));
+		jobAdvert.setWorkHour(this.workHourDao.getById(jobAdvertDetailDto.getWorkHourId()));
+		jobAdvert.setWorkType(this.workTypeDao.getById(jobAdvertDetailDto.getWorkTypeId()));
+		jobAdvert.setDescription(jobAdvertDetailDto.getDescription());
+		jobAdvert.setSalaryMax(jobAdvertDetailDto.getMaxSalary());
+		jobAdvert.setSalaryMin(jobAdvertDetailDto.getMinSalary());
+		jobAdvert.setOpenPositionCount(jobAdvertDetailDto.getOpenPositionCount());
+		jobAdvert.setEmployer(this.employerDao.GetById(jobAdvertDetailDto.getEmployerId()));
+		jobAdvert.setDeadline(jobAdvertDetailDto.getDeadLine());
+	
+		
+		this.jobAdvertDao.save(jobAdvert);
+		
+		//JobAdvertConfirmation jobAdvertConfirmation = new JobAdvertConfirmation();
+		return new SuccessResult("başarı ile eklendi");
+		
+	}
+	
+
+
+	@Override
+	public Result changeIsActiveByEmployee(int jobAdvertId) {
+		
+		// sadece true'ya çekmek için 
+		JobAdvert jobAdvertIsActiveEmployee= this.jobAdvertDao.getById(jobAdvertId);
+		jobAdvertIsActiveEmployee.setActive(!jobAdvertIsActiveEmployee.isActive());
+		this.jobAdvertDao.save(jobAdvertIsActiveEmployee);
+		return new SuccessResult("İş ilanının admin tarafından aktifliği değiştirildi");
+	}
+
+
+
+	@Override
+	public Result changeIsOpenByEmployer(int jobAdvertId) {
+		
+		// İş verenin aktiflik değiştireceği
+		JobAdvert jobAdvertToChangeIsOpen =this.jobAdvertDao.getById(jobAdvertId);
+		jobAdvertToChangeIsOpen.setOpen(!jobAdvertToChangeIsOpen.isOpen());
+		this.jobAdvertDao.save(jobAdvertToChangeIsOpen);
+		return new SuccessResult("İş ilanının iş veren tarafından tarafından aktifliği değiştirildi");
+	}
+
+
+
+	@Override
+	public DataResult<List<JobAdvert>> getAllByIsActiveByEmployee() {
+		
+		// BURASI AÇIK İŞ İLANLARI VE DOĞRULANMIŞ İŞ İLANLARININ GÖZÜKTÜĞÜ KISIM
+		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getAllByIsActiveByEmployee());
+	}
+
+
+
+	@Override
+	public DataResult<List<JobAdvert>> getAllByIsActiveByEmployee_False() {
+		
+		// Açık olan iş ilanlarını admin görecek sadece kendi sisteminden onaylamak için
+		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getAllByIsActiveByEmployee_False()) ;
+	}
+
+
+
+	@Override
+	public DataResult<JobAdvert> getById(int id) {
+		return new SuccessDataResult<JobAdvert>(this.jobAdvertDao.getOne(id));
+	}
+
+
+
+	@Override
+	public DataResult<List<JobAdvert>> getAllOpenJobAdvertList() {
+		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getAllOpenJobAdvertList());
+	}
+
+
+
+	@Override
+	public DataResult<List<JobAdvert>> findAllByOrderByPublishedAt() {
+		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAllByOrderByPublishedAtDesc());
+	}
+
+
+
+	@Override
+	public DataResult<List<JobAdvert>> getAllOpenJobAdvertByEmployer(int id) {
+		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getAllOpenJobAdvertByEmployer(id));
+	}
+
+
+
+	@Override
+	public DataResult<List<JobAdvert>> getAllByEmployerId(int employerId) {
+		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getAllByEmployerId(employerId));
+	}
 
 	
 
@@ -115,7 +227,17 @@ public class JobAdvertManager implements JobAdvertService {
 			return new ErrorResult("Minimum maaş maximum maaştan büyük veya eşit olamaz");
 		}
 		return new SuccessResult();
-	}	
+	}
+	
+	private Result CheckIfNullField(JobAdvert jobAdvert) {
+		if (jobAdvert.getJobPosition().getId() != 0 && jobAdvert.getDescription() != null && jobAdvert.getCity().getId() != 0
+				&& jobAdvert.getOpenPositionCount() != 0) {
+			return new SuccessResult();
+		}
+		return new ErrorResult("Alanlar boş olamaz");
+	}
+
+	
 
  	/*private Result checkAplicationDeadline(int jobAdvertId, JobAdvert jobAdvert) {
 		

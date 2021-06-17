@@ -51,6 +51,16 @@ public class JobPositionManager implements JobPositionService {
 		this.jobPositionDao.deleteById(id);;
 		return new SuccessResult("JobPosition deleted");
 	}
+
+	@Override
+	public DataResult<JobPosition> getById(int id) {
+		return new SuccessDataResult<JobPosition>(this.jobPositionDao.getOne(id));
+	}
+
+	@Override
+	public DataResult<JobPosition> getJobByTitle(String title) {
+		return new SuccessDataResult<JobPosition>(this.jobPositionDao.findByJobPosition(title));
+	}
 	
 	
 	//******************************************* KURALLAR *******************************************
@@ -62,7 +72,5 @@ public class JobPositionManager implements JobPositionService {
 		}
 		return new SuccessResult();
 	}
-
-	
 
 }

@@ -34,12 +34,29 @@ public class UserManager implements UserService {
 	@CacheEvict(value="allUsers",allEntries = true)
 	public Result add(User user) {
 		this.userDao.save(user);
-	    return new SuccessResult("User has been added.");
+	    return new SuccessResult("User added.");
 	}
 
 	@Override
+	public Result update(User user) {
+		this.userDao.save(user);
+	      return new SuccessResult("User updated.");
+	}
+
+	@Override
+	public Result delete(int id) {
+		this.userDao.deleteById(id);
+	      return new SuccessResult("User deleted.");
+	}
+	
+	@Override
 	public DataResult<User> getUserByEmail(String email) {
 		return new SuccessDataResult<User>(this.userDao.findUserByEmail(email));
+	}
+
+	@Override
+	public DataResult<User> getById(int id) {
+		return new SuccessDataResult<User>(this.userDao.getOne(id));
 	}
 
 }
