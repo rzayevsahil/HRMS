@@ -15,6 +15,8 @@ import kodlamaio.hrms.core.utilities.business.BusinessRules;
 import kodlamaio.hrms.dataAccess.abstracts.CityDao;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdvertDao;
+import kodlamaio.hrms.dataAccess.abstracts.WorkHourDao;
+import kodlamaio.hrms.dataAccess.abstracts.WorkTypeDao;
 import kodlamaio.hrms.entities.concretes.JobAdvert;
 import kodlamaio.hrms.entities.dtos.JobAdvertDto;
 
@@ -24,14 +26,21 @@ public class JobAdvertManager implements JobAdvertService {
 	private JobAdvertDao jobAdvertDao;
 	private EmployerDao employerDao;
 	private CityDao cityDao;
+	private WorkTypeDao workTypeDao;
+	private WorkHourDao workHourDao;
 
 	@Autowired
-	public JobAdvertManager(JobAdvertDao jobAdvertDao,EmployerDao employerDao,CityDao cityDao) {
+	public JobAdvertManager(JobAdvertDao jobAdvertDao, EmployerDao employerDao, CityDao cityDao,
+			WorkTypeDao workTypeDao, WorkHourDao workHourDao) {
 		super();
 		this.jobAdvertDao = jobAdvertDao;
 		this.employerDao = employerDao;
 		this.cityDao = cityDao;
+		this.workTypeDao = workTypeDao;
+		this.workHourDao = workHourDao;
 	}
+
+	
 	
 	@Override
 	public DataResult<List<JobAdvert>> getAll() {

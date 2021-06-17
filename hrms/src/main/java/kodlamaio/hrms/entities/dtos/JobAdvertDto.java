@@ -1,5 +1,6 @@
 package kodlamaio.hrms.entities.dtos;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -17,5 +18,5 @@ public class JobAdvertDto {
 	private String jobPosition;
 	private int openPositionCount;
 	private LocalDateTime publishedAt = LocalDateTime.now();
-	private LocalDateTime deadline;
+	private LocalDate deadline;
 }

@@ -60,7 +60,7 @@ public class JobAdvert {
 	@Future
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@NotNull(message="Deadline can not be null")
-	private LocalDateTime deadline;
+	private LocalDate deadline;
 	
 	@Column(name = "published_at")
 	@NotNull(message="PublishedAt can not be null")
@@ -90,4 +90,12 @@ public class JobAdvert {
 	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;
+	
+	@ManyToOne
+	@JoinColumn(name="work_hour_id")
+	private WorkHour workHour;
+	
+	@ManyToOne
+	@JoinColumn(name="work_type_id")
+	private WorkType workType;
 }
