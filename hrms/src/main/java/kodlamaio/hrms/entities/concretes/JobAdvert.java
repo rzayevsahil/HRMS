@@ -1,7 +1,6 @@
 package kodlamaio.hrms.entities.concretes;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -63,20 +62,23 @@ public class JobAdvert {
 	@NotNull(message="Deadline can not be null")
 	private LocalDate deadline;
 	
-	@Column(name = "published_at")
+	@Column(name = "published_at",columnDefinition = "Date default CURRENT_DATE")
 	@NotNull(message="PublishedAt can not be null")
-	private LocalDateTime publishedAt;
+	private LocalDate publishedAt= LocalDate.now();
 
 	@Column(name = "created_at", columnDefinition = "Date default CURRENT_DATE")
 	@JsonIgnore
 	private LocalDate createdAt = LocalDate.now();
 
+	
 	@Column(name = "is_open", columnDefinition = "boolean default true")
 	private boolean isOpen = true;
 
-	@Column(name = "is_active", columnDefinition = "boolean default true")
-	private boolean isActive = true;
+	@JsonIgnore
+	@Column(name = "is_active", columnDefinition = "boolean default false")
+	private boolean isActive = false;
 
+	@JsonIgnore
 	@Column(name = "is_deleted", columnDefinition = "boolean default false")
 	private boolean isDeleted = false;
 

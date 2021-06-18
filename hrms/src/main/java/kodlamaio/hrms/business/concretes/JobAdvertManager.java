@@ -1,6 +1,5 @@
 package kodlamaio.hrms.business.concretes;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobAdvertService;
 import kodlamaio.hrms.core.utilities.DataResult;
-import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.ErrorResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
@@ -109,7 +107,7 @@ public class JobAdvertManager implements JobAdvertService {
 	public Result add(JobAdvertDetailDto jobAdvertDetailDto) {
 		
 		JobAdvert jobAdvert = new JobAdvert();
-		LocalDateTime dateTime=LocalDateTime.now();
+		//LocalDate dateTime=LocalDate.now();
 		jobAdvert.setCity(this.cityDao.getById(jobAdvertDetailDto.getCityId()));
 		jobAdvert.setJobPosition(this.jobPositionDao.getById(jobAdvertDetailDto.getJobPositionId()));
 		jobAdvert.setWorkHour(this.workHourDao.getById(jobAdvertDetailDto.getWorkHourId()));
@@ -120,11 +118,13 @@ public class JobAdvertManager implements JobAdvertService {
 		jobAdvert.setOpenPositionCount(jobAdvertDetailDto.getOpenPositionCount());
 		jobAdvert.setEmployer(this.employerDao.getById(jobAdvertDetailDto.getEmployerId()));
 		jobAdvert.setDeadline(jobAdvertDetailDto.getDeadLine());
-		jobAdvert.setOpen(true);
+		
+		//bunlar zaten default olarak geliyor
+		/*jobAdvert.setOpen(true);
 		jobAdvert.setDeleted(false);
 		jobAdvert.setCreatedAt(jobAdvert.getCreatedAt());
 		jobAdvert.setPublishedAt(dateTime);
-		jobAdvert.setActive(true);
+		jobAdvert.setActive(true);*/
 	
 		Result result = BusinessRules.run(CheckIfNullField(jobAdvert),salaryControl(jobAdvert));		
 		if(result.isSuccess()) {				
