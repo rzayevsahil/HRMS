@@ -55,7 +55,7 @@ public class JobPositionsController {
 	}
 	
 	@GetMapping("/getbyid")
-	public DataResult<JobPosition> getById(@PathVariable("id") int id){
+	public DataResult<JobPosition> getById(@RequestParam int id){
 		return this.jobPositionService.getById(id);
 	}
 	

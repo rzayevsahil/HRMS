@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.EmployerService;
 import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.entities.concretes.Employee;
 import kodlamaio.hrms.entities.concretes.Employer;
 
 @RestController
@@ -52,6 +54,11 @@ public class EmployersController {
 	@DeleteMapping("Delete")
 	public ResponseEntity<?> delete(@Valid @RequestParam int employerId) {
 		return ResponseEntity.ok(this.employerService.delete(employerId));
+	}
+	
+	@GetMapping("getbyid")
+	public DataResult<Employer> getById(@RequestParam int id){
+		return this.employerService.getById(id);
 	}
 	
 }

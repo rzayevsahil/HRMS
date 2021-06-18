@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.EmployeeService;
@@ -56,7 +57,7 @@ public class EmployeesController {
 	}
 	
 	@GetMapping("getbyid")
-	public DataResult<Employee> getById(@PathVariable("id") int id){
+	public DataResult<Employee> getById(@RequestParam int id){
 		return this.employeeService.getById(id);
 	}
 

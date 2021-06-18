@@ -1,5 +1,6 @@
 package kodlamaio.hrms.business.concretes;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobAdvertService;
 import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.ErrorResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
@@ -107,6 +109,7 @@ public class JobAdvertManager implements JobAdvertService {
 	public Result add(JobAdvertDetailDto jobAdvertDetailDto) {
 		
 		JobAdvert jobAdvert = new JobAdvert();
+		LocalDateTime dateTime=LocalDateTime.now();
 		jobAdvert.setCity(this.cityDao.getById(jobAdvertDetailDto.getCityId()));
 		jobAdvert.setJobPosition(this.jobPositionDao.getById(jobAdvertDetailDto.getJobPositionId()));
 		jobAdvert.setWorkHour(this.workHourDao.getById(jobAdvertDetailDto.getWorkHourId()));
@@ -117,12 +120,22 @@ public class JobAdvertManager implements JobAdvertService {
 		jobAdvert.setOpenPositionCount(jobAdvertDetailDto.getOpenPositionCount());
 		jobAdvert.setEmployer(this.employerDao.getById(jobAdvertDetailDto.getEmployerId()));
 		jobAdvert.setDeadline(jobAdvertDetailDto.getDeadLine());
+		jobAdvert.setOpen(true);
+		jobAdvert.setDeleted(false);
+		jobAdvert.setCreatedAt(jobAdvert.getCreatedAt());
+		jobAdvert.setPublishedAt(dateTime);
+		jobAdvert.setActive(true);
 	
+		Result result = BusinessRules.run(CheckIfNullField(jobAdvert),salaryControl(jobAdvert));		
+		if(result.isSuccess()) {				
+			this.jobAdvertDao.save(jobAdvert);
+			return new SuccessResult("başarı ile eklendi");			
+		}
+		return result;
 		
-		this.jobAdvertDao.save(jobAdvert);
 		
 		//JobAdvertConfirmation jobAdvertConfirmation = new JobAdvertConfirmation();
-		return new SuccessResult("başarı ile eklendi");
+		
 		
 	}
 	
@@ -172,7 +185,7 @@ public class JobAdvertManager implements JobAdvertService {
 
 	@Override
 	public DataResult<JobAdvert> getById(int id) {
-		return new SuccessDataResult<JobAdvert>(this.jobAdvertDao.getOne(id));
+			return new SuccessDataResult<JobAdvert>(this.jobAdvertDao.getById(id),"Data listelendi");
 	}
 
 
@@ -208,12 +221,11 @@ public class JobAdvertManager implements JobAdvertService {
 	//************************** Kurallar ***********************************
 	
 	private Result employerControl(int id) {
-		if(!employerDao.existsById(id)) {
+		if(!employerDao.findAll().stream().equals(id)) {
 			return new ErrorResult("böyle bir kullanıcı yok");
 		}
 		return new SuccessResult();
 	}
-	
 	private Result cityControl(int id) {
 		if(!cityDao.existsById(id)) {
 			return new ErrorResult("böyle bir şehir yok");
@@ -229,13 +241,36 @@ public class JobAdvertManager implements JobAdvertService {
 		return new SuccessResult();
 	}
 	
+	
 	private Result CheckIfNullField(JobAdvert jobAdvert) {
-		if (jobAdvert.getJobPosition().getId() != 0 && jobAdvert.getDescription() != null && jobAdvert.getCity().getId() != 0
+		if (jobAdvert.getJobPosition().getId() != 0 && !jobAdvert.getDescription().isEmpty() && jobAdvert.getCity().getId() != 0
 				&& jobAdvert.getOpenPositionCount() != 0) {
 			return new SuccessResult();
 		}
 		return new ErrorResult("Alanlar boş olamaz");
 	}
+	
+	
+	/*private Result nullEmployerId(int employerId) {
+		if (!employerDao.findAll().stream().equals(employerDao.getById(employerId))) {
+			return new ErrorResult("This EmployerId doesn't find");
+		}
+		return new SuccessResult();
+	}
+	
+	private Result nullCityId(int cityId) {
+		if (!cityDao.findAll().stream().equals(cityDao.getById(cityId))) {
+			return new ErrorResult("This CityId doesn't find");
+		}
+		return new SuccessResult();
+	}
+	
+	private Result nullJobAdvertId(int jobAdvertId) {
+		if (!jobAdvertDao.findAll().stream().equals(cityDao.getById(jobAdvertId))) {
+			return new ErrorResult("This JobAdvertId doesn't find");
+		}
+		return new SuccessResult();
+	}*/
 
 	
 

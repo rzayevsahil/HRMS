@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.UserService;
@@ -56,7 +57,7 @@ public class UsersController {
 	}
 	
 	@GetMapping("getbyid")
-	public DataResult<User> getById(@PathVariable("id") int id){
+	public DataResult<User> getById(@RequestParam("id") int id){
 		return this.userService.getById(id);
 	}
 	

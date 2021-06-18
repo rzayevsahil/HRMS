@@ -54,7 +54,7 @@ public class JobPositionManager implements JobPositionService {
 
 	@Override
 	public DataResult<JobPosition> getById(int id) {
-		return new SuccessDataResult<JobPosition>(this.jobPositionDao.getOne(id));
+		return new SuccessDataResult<JobPosition>(this.jobPositionDao.getById(id));
 	}
 
 	@Override

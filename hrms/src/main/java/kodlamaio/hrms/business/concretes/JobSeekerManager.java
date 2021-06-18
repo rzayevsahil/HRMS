@@ -13,6 +13,7 @@ import kodlamaio.hrms.business.abstracts.LanguageForCvService;
 import kodlamaio.hrms.business.abstracts.LinkForCvService;
 import kodlamaio.hrms.business.abstracts.SkillForCvService;
 import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.ErrorResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
@@ -78,12 +79,20 @@ public class JobSeekerManager implements JobSeekerService {
 	
 	@Override
 	public DataResult<JobSeeker> getById(int id) {
-		return new SuccessDataResult<JobSeeker>(this.jobseekerDao.getById(id));
+		/*Result result=BusinessRules.run(nullJobSeekerId(id));
+		if (result.isSuccess()) {*/
+			return new SuccessDataResult<JobSeeker>(this.jobseekerDao.getById(id));
+		/*}
+		return new ErrorDataResult<JobSeeker>(result.getMessage());*/
 	}
 
 	@Override
 	public DataResult<JobSeeker> getJobseekerByNationalId(String nationalId) {
-		return new SuccessDataResult<JobSeeker>(this.jobseekerDao.findJobseekerByNationalId(nationalId));
+		Result result=BusinessRules.run(nullNationalId(nationalId));
+		if (result.isSuccess()) {
+			return new SuccessDataResult<JobSeeker>(this.jobseekerDao.findJobseekerByNationalId(nationalId));
+		}
+		return new ErrorDataResult<JobSeeker>(nullNationalId(nationalId).getMessage());
 	}
 
 	@Override
@@ -114,5 +123,19 @@ public class JobSeekerManager implements JobSeekerService {
 		}
 		return new SuccessResult();
 	}
+	
+	private Result nullNationalId(String nationalId) {
+		if (jobseekerDao.findAllByNationalId(nationalId).stream().toString()!=nationalId) {
+			return new ErrorResult("This TC doesn't find");
+		}
+		return new SuccessResult();
+	}
+	
+	/*private Result nullJobSeekerId(int jobSeekerId) {
+		if (!jobseekerDao.findAll().stream().equals(jobseekerDao.getById(jobSeekerId))) {
+			return new ErrorResult("This JobSeekerId doesn't find");
+		}
+		return new SuccessResult();
+	}*/
 
 }

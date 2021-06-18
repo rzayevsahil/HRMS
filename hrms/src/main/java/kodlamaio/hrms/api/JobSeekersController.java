@@ -55,9 +55,9 @@ public class JobSeekersController {
 		return ResponseEntity.ok(jobseekerService.delete(id));
 	}
 	 
-	@GetMapping("getById")
-	public DataResult<JobSeeker> getJobseekerByNationalId(@RequestParam int id){
-		return jobseekerService.getById(id);
+	@GetMapping("getJobseekerByNationalId")
+	public DataResult<JobSeeker> getJobseekerByNationalId(@RequestParam String nationalId){
+		return jobseekerService.getJobseekerByNationalId(nationalId);
 	}
 	
 	@GetMapping("getJobseekerCVById")

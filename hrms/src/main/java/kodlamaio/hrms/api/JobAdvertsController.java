@@ -84,7 +84,7 @@ public class JobAdvertsController {
 	
 	
 	@GetMapping("getbyid")
-	public DataResult<JobAdvert> getById(@PathVariable("id") int id){
+	public DataResult<JobAdvert> getById(@RequestParam int id){
 		return this.jobAdvertService.getById(id);
 	}
 	

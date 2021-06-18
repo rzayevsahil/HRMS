@@ -56,8 +56,8 @@ public class CitiesController {
 		return ResponseEntity.ok(this.cityService.delete(cityId));
 	}
 	
-	@GetMapping("/getbyid")
-	public DataResult<City> getById(@PathVariable("id") int id){
+	@GetMapping("getbyid")
+	public DataResult<City> getById(@RequestParam int id){
 		return this.cityService.getById(id);
 	}
 	
