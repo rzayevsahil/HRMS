@@ -6,8 +6,8 @@
 ---
 <br>
 
-## *Gerçek email'e doğrulama mesajı gönderilme*
-<img src="https://user-images.githubusercontent.com/58303745/122656451-a1220800-d16b-11eb-8b9a-e483e68afefd.jpg" width="80%" />
+## *Gerçek email'e doğrulama mesajı gönderme*
+<img src="https://user-images.githubusercontent.com/58303745/122657001-9ddd4b00-d170-11eb-81d1-a645fb271a6b.jpg" width="80%" />
 
 
 ## *BACKEND İSTERLERİ* 
