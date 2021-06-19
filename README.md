@@ -6,6 +6,10 @@
 ---
 <br>
 
+## *Gerçek email'e doğrulama mesajı gönderilme*
+<img src="https://user-images.githubusercontent.com/58303745/122656451-a1220800-d16b-11eb-8b9a-e483e68afefd.jpg" width="80%" />
+
+
 ## *BACKEND İSTERLERİ* 
 
 ## *🔴: Madde 1 : İş Arayanlar sisteme kayıt olabilmelidir.*
