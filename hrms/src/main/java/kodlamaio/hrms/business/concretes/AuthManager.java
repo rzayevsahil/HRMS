@@ -3,6 +3,7 @@ package kodlamaio.hrms.business.concretes;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.AuthService;
@@ -10,6 +11,7 @@ import kodlamaio.hrms.business.abstracts.EmployerService;
 import kodlamaio.hrms.business.abstracts.JobSeekerService;
 import kodlamaio.hrms.business.abstracts.UserService;
 import kodlamaio.hrms.business.abstracts.VerificationCodeService;
+import kodlamaio.hrms.core.mailSenderSpring.MailSenderService;
 import kodlamaio.hrms.core.utilities.ErrorResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessResult;
@@ -29,11 +31,12 @@ public class AuthManager implements AuthService{
 	private VerificationService verificationService;
 	private MernisService mernisService;
 	private VerificationCodeService verificationCodeService;
+	private MailSenderService mailSenderService;
 	
 	@Autowired
 	public AuthManager(UserService userService, EmployerService employerService, JobSeekerService jobseekerService,
 			VerificationService verificationService, MernisService mernisService,
-			VerificationCodeService verificationCodeService) {
+			VerificationCodeService verificationCodeService, MailSenderService mailSenderService) {
 		super();
 		this.userService = userService;
 		this.employerService = employerService;
@@ -41,6 +44,7 @@ public class AuthManager implements AuthService{
 		this.verificationService = verificationService;
 		this.mernisService = mernisService;
 		this.verificationCodeService = verificationCodeService;
+		this.mailSenderService=mailSenderService;
 	}
 	
 	
@@ -57,7 +61,7 @@ public class AuthManager implements AuthService{
 			
 			employerService.add(employer);
 			String code = verificationService.sendCode();
-			verificationCodeRecord(code, employer.getId(), employer.getEmail());
+			verificationCodeRecord(code, employer.getId(), employer.getEmail());			
 			return new SuccessResult("Registration has been successfully completed");
 		}
 		
@@ -76,6 +80,7 @@ public class AuthManager implements AuthService{
 			jobseekerService.add(jobseeker);
 			String code = verificationService.sendCode();
 			verificationCodeRecord(code, jobseeker.getId(), jobseeker.getEmail());
+			//mailSenderService.sendSimpleEmail(jobseeker.getEmail(), "Hrms verification code", code); //gerçek zamanlı mesaj gönderir
 			return new SuccessResult("Registration has been successfully completed");
 		}
 		

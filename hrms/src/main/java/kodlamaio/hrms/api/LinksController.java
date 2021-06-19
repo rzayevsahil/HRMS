@@ -36,9 +36,7 @@ public class LinksController {
 	public ResponseEntity<?> add(@Valid @RequestBody LinkForCv linkForCv){
 		return ResponseEntity.ok(this.linkForCvService.add(linkForCv));
 	}
-	
-	
-	
+		
 	@PutMapping("update")
 	public ResponseEntity<?> update(@Valid @RequestBody LinkForCv linkForCV){
 		return ResponseEntity.ok(this.linkForCvService.update(linkForCV));

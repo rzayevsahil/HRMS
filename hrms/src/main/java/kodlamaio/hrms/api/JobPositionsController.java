@@ -53,7 +53,7 @@ public class JobPositionsController {
 		return ResponseEntity.ok(this.jobPositionService.delete(id));
 	}
 	
-	@GetMapping("/getbyid")
+	@GetMapping("getbyid")
 	public DataResult<JobPosition> getById(@RequestParam int id){
 		return this.jobPositionService.getById(id);
 	}

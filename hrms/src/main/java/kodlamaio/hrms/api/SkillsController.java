@@ -59,7 +59,7 @@ public class SkillsController {
 			return this.skillForCvService.getAll();
 		}
 		
-		@GetMapping("/getAllByJobseekerId")
+		@GetMapping("getAllByJobseekerId")
 		public DataResult<List<SkillForCv>> getAllByJobseekerId(@RequestParam int id){
 			return this.skillForCvService.getAllByJobSeekerId(id);
 		}
