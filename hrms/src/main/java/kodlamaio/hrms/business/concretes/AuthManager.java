@@ -80,7 +80,7 @@ public class AuthManager implements AuthService{
 			jobseekerService.add(jobseeker);
 			String code = verificationService.sendCode();
 			verificationCodeRecord(code, jobseeker.getId(), jobseeker.getEmail());
-			//mailSenderService.sendSimpleEmail(jobseeker.getEmail(), "Hrms verification code","Doğrulama kodunuz : " + code); //gerçek zamanlı mesaj gönderir
+			mailSenderService.sendSimpleEmail(jobseeker.getEmail(), "Hrms verification code","Doğrulama kodunuz : " + code + "\nİsminiz : "+jobseeker.getFirstName()+"\nSoyisminiz : " + jobseeker.getLastName()+"\nHrms websitesine hoş geldiniz...Güzel bi karyer sizi bekliyor...\nSevgiyle Hrms Website"); //gerçek zamanlı mesaj gönderir
 			return new SuccessResult("Registration has been successfully completed");
 		}
 		

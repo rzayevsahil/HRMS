@@ -145,7 +145,7 @@ public class JobAdvertManager implements JobAdvertService {
 	public Result changeIsActiveByEmployee(int jobAdvertId) {
 		
 		// sadece true'ya çekmek için 
-		JobAdvert jobAdvertIsActiveEmployee= this.jobAdvertDao.getById(jobAdvertId);
+		JobAdvert jobAdvertIsActiveEmployee= this.jobAdvertDao.findById(jobAdvertId);
 		jobAdvertIsActiveEmployee.setActive(!jobAdvertIsActiveEmployee.isActive());
 		this.jobAdvertDao.save(jobAdvertIsActiveEmployee);
 		return new SuccessResult("İş ilanının admin tarafından aktifliği değiştirildi");
@@ -157,7 +157,7 @@ public class JobAdvertManager implements JobAdvertService {
 	public Result changeIsOpenByEmployer(int jobAdvertId) {
 		
 		// İş verenin aktiflik değiştireceği
-		JobAdvert jobAdvertToChangeIsOpen =this.jobAdvertDao.getById(jobAdvertId);
+		JobAdvert jobAdvertToChangeIsOpen =this.jobAdvertDao.findById(jobAdvertId);
 		jobAdvertToChangeIsOpen.setOpen(!jobAdvertToChangeIsOpen.isOpen());
 		this.jobAdvertDao.save(jobAdvertToChangeIsOpen);
 		return new SuccessResult("İş ilanının iş veren tarafından tarafından aktifliği değiştirildi");
@@ -185,7 +185,7 @@ public class JobAdvertManager implements JobAdvertService {
 
 	@Override
 	public DataResult<JobAdvert> getById(int id) {
-			return new SuccessDataResult<JobAdvert>(this.jobAdvertDao.getById(id),"Data listelendi");
+			return new SuccessDataResult<JobAdvert>(this.jobAdvertDao.findById(id),"Data listelendi");
 	}
 
 

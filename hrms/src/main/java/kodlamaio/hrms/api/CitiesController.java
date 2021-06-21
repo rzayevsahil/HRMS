@@ -1,5 +1,6 @@
 package kodlamaio.hrms.api;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.itextpdf.text.DocumentException;
 
 import kodlamaio.hrms.business.abstracts.CityService;
 import kodlamaio.hrms.core.utilities.DataResult;
@@ -41,7 +44,7 @@ public class CitiesController {
 	}
 	
 	@PostMapping("add")
-	public ResponseEntity<?> add(@Valid @RequestBody City city) {
+	public ResponseEntity<?> add(@Valid @RequestBody City city)throws FileNotFoundException, DocumentException {
 		return ResponseEntity.ok(this.cityService.add(city));
 	}
 	

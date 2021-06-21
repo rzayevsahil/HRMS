@@ -74,7 +74,7 @@ public class JobAdvert {
 	@Column(name = "is_open", columnDefinition = "boolean default true")
 	private boolean isOpen = true;
 
-	@JsonIgnore
+	
 	@Column(name = "is_active", columnDefinition = "boolean default false")
 	private boolean isActive = false;
 
