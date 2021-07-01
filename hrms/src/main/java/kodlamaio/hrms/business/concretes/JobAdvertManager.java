@@ -3,6 +3,8 @@ package kodlamaio.hrms.business.concretes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobAdvertService;
@@ -129,7 +131,7 @@ public class JobAdvertManager implements JobAdvertService {
 		Result result = BusinessRules.run(CheckIfNullField(jobAdvert),salaryControl(jobAdvert));		
 		if(result.isSuccess()) {				
 			this.jobAdvertDao.save(jobAdvert);
-			return new SuccessResult("başarı ile eklendi");			
+			return new SuccessResult("Başarı ile eklendi");			
 		}
 		return result;
 		
@@ -156,11 +158,20 @@ public class JobAdvertManager implements JobAdvertService {
 	@Override
 	public Result changeIsOpenByEmployer(int jobAdvertId) {
 		
-		// İş verenin aktiflik değiştireceği
+		//İş verenin isOpen'ı değiştirince aktivlik direk false oluyor ve onu yeniden open yapsa bile o false da kalıyor
+		//çünkü iş veren yeniden kapattığı ilanı tekrar açması sanki yeniden yeni bir iş ilanı eklemesi demek oluyor
+		//ve bu ilan yeniden sistem personeli yani employee tarafında doğrulanmalı
 		JobAdvert jobAdvertToChangeIsOpen =this.jobAdvertDao.findById(jobAdvertId);
 		jobAdvertToChangeIsOpen.setOpen(!jobAdvertToChangeIsOpen.isOpen());
+		jobAdvertToChangeIsOpen.setActive(false);
+		/*if (jobAdvertToChangeIsOpen.isOpen()) {
+			this.jobAdvertDao.save(jobAdvertToChangeIsOpen);
+			return new SuccessResult("İş ilanının iş veren tarafından tarafından aktifliği değiştirildi");
+		}*/
 		this.jobAdvertDao.save(jobAdvertToChangeIsOpen);
 		return new SuccessResult("İş ilanının iş veren tarafından tarafından aktifliği değiştirildi");
+		
+		
 	}
 
 
@@ -215,6 +226,14 @@ public class JobAdvertManager implements JobAdvertService {
 	public DataResult<List<JobAdvert>> getAllByEmployerId(int employerId) {
 		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getAllByEmployerId(employerId));
 	}
+	
+	@Override
+	public DataResult<List<JobAdvert>> getAllPagination(int pageNo) {
+		Pageable pageable = PageRequest.of(pageNo-1, 10);
+	
+		//return  new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAll(pageable).getContent(),"Başarılı");
+		return  new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.getAllByIsActiveTrueAndIsOpenTrueOrderByDeadlineDesc(pageable));
+	}
 
 	
 
@@ -249,6 +268,7 @@ public class JobAdvertManager implements JobAdvertService {
 		}
 		return new ErrorResult("Alanlar boş olamaz");
 	}
+
 	
 	
 	/*private Result nullEmployerId(int employerId) {

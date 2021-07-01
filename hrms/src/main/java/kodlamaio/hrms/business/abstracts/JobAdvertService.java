@@ -2,6 +2,7 @@ package kodlamaio.hrms.business.abstracts;
 
 import java.util.List;
 
+
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.entities.concretes.JobAdvert;
@@ -16,6 +17,8 @@ public interface JobAdvertService {
 	Result Add(JobAdvert jobAdvert);
 	Result update(JobAdvert jobAdvert);
 	Result delete(int jobAdvertId);
+	
+	DataResult<List<JobAdvert>> getAllPagination(int pageNo);
 	
 	Result changeIsActiveByEmployee(int jobAdvertId);	
 	Result changeIsOpenByEmployer(int jobAdvertId);

@@ -1,5 +1,6 @@
 package kodlamaio.hrms.dataAccess.abstracts;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -21,6 +22,8 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer> {
 	List<JobAdvert> getAllByEmployerId(int employerId);
 		
 	JobAdvert findById(int id);
+	
+	
     
     @Query("Select new kodlamaio.hrms.entities.dtos.JobAdvertDto(j.id,p.jobPosition,c.name,e.companyName,j.openPositionCount,j.publishedAt,j.deadline) "
     		+ "From JobAdvert j "
@@ -28,6 +31,9 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer> {
     		+ "Inner Join j.jobPosition p "
     		+ "Inner Join j.city c")
     List<JobAdvertDto> getJobAdvertDetails();
+    
+    @Query("From JobAdvert where is_active=true and is_open=true order by deadline desc") //published_at
+    List<JobAdvert> getAllByIsActiveTrueAndIsOpenTrueOrderByDeadlineDesc(Pageable pageable);
     
     
     
@@ -42,7 +48,7 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer> {
 	@Query("From JobAdvert where isOpen = true and employer_id =:id")//iş ilanının employer iye göre gelmesi
 	List<JobAdvert> getAllOpenJobAdvertByEmployer(int id);
 	
-	@Query("From JobAdvert where is_active=true AND is_open=true Order By published_at DESC")// iş arayanın göreceği 1.sayfa
+	@Query("From JobAdvert where is_active=true AND is_open=true Order By published_at DESC")// iş arayanın göreceği 1.sayfa home sayfası
 	List<JobAdvert> getAllByIsActiveByEmployee();
 	
 	@Query("From JobAdvert where is_active=false And is_open=true Order By published_at DESC")//active edilmemiş ADMİN GÖRÜCEK

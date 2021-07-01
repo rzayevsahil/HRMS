@@ -104,6 +104,7 @@ public class JobSeekerManager implements JobSeekerService {
 		cv.links =this.linkForCvService.getAllByJobSeekerId(id).getData();
 		cv.skills=this.skillForCvService.getAllByJobSeekerId(id).getData();
 		cv.educations=this.educationForCvService.getAllByJobSeekerId(id).getData();
+		cv.jobSeeker=this.jobseekerDao.getById(id);
 		return new SuccessDataResult<JobSeekerCvDto>(cv);
 	}
 	
@@ -130,6 +131,8 @@ public class JobSeekerManager implements JobSeekerService {
 		}
 		return new SuccessResult();
 	}
+
+	
 	
 	/*private Result nullJobSeekerId(int jobSeekerId) {
 		if (!jobseekerDao.findAll().stream().equals(jobseekerDao.getById(jobSeekerId))) {

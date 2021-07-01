@@ -13,4 +13,5 @@ public interface CoverLetterForCvService {
 	Result delete(int id);
 	DataResult<CoverLetterForCv> getById(int id);
 	DataResult<List<CoverLetterForCv>> getAll();
+	DataResult<List<CoverLetterForCv>> getAllByJobSeekerId(int id);
 }

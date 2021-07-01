@@ -1,23 +1,28 @@
 package kodlamaio.hrms.business.concretes;
 
-import java.io.FileInputStream;
+//import java.awt.Image;
+//import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.InputStreamReader;
+//import java.io.InputStreamReader;
 import java.util.List;
 
+//import org.apache.pdfbox.pdmodel.PDDocument;
+//import org.apache.pdfbox.pdmodel.PDPage;
+//import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Chunk;
+//import com.itextpdf.text.BaseColor;
+//import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.FontFactory;
+//import com.itextpdf.text.Font;
+//import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfPTable;
+//import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+//import com.itextpdf.text.pdf.parser.Path;
 
 import kodlamaio.hrms.business.abstracts.CityService;
 import kodlamaio.hrms.core.utilities.DataResult;
@@ -49,28 +54,36 @@ public class CityManager implements CityService{
 	public Result add(City city) throws FileNotFoundException, DocumentException {
 		Result result=BusinessRules.run(cityNameExists(city));
 		
-		//InputStreamReader input = new InputStreamReader(new FileInputStream("input.txt"));
+		//InputStreamReader input = new InputStreamReader(new FileInputStream("input.txt"))
+		
+		Document document = new Document();
+		//Path path = Paths.get(ClassLoader.getSystemResource("logo.png").toURI());
+		/*PDDocument doc = new PDDocument();
+		PDPage page=new PDPage();
+		doc.addPage(page);*/
+		//FileInputStream in=new FileInputStream("C:/repos/hrms-backend/hrms/Images/logo.jpg");
+		/*PDJpeg  img=PDJp(doc,in);
+		PDPageContentStream stream=new PDPageContentStream(doc, null);*/
 		if (result.isSuccess()) {
 			String cityNameUpperCase=city.getName().toUpperCase();
 			city.setName(cityNameUpperCase);
 			this.cityDao.save(city);
+			try {
+				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("C:/repos/hrms-backend/hrms/Pdf/"+city.getName()+".pdf"));
+				//Image img = Image.getInstance(path.toAbsolutePath().toString());
+				document.open();
+				document.add(new Paragraph(city.getName()));
+				document.close();
+				writer.close();
+				//PdfPTable table=new PdfPTable(null);
+			} catch (DocumentException e) {
+				e.printStackTrace();
+			}catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 			return new SuccessResult("City added");
 		}
-		String cityNameUpperCase=city.getName().toUpperCase();
-		city.setName(cityNameUpperCase);
-		/*Document document = new Document();
-		try {
-			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("C:/repos/hrms-backend/hrms/Pdf/merhaba.pdf"));
-			document.open();
-			document.add(new Paragraph(city.getName()));
-			document.close();
-			writer.close();
-			//PdfPTable table=new PdfPTable(null);
-		} catch (DocumentException e) {
-			e.printStackTrace();
-		}catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}*/
+		
 		
 
 		/*Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);

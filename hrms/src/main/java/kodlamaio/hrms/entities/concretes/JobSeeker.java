@@ -1,7 +1,6 @@
 package kodlamaio.hrms.entities.concretes;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -61,7 +60,7 @@ public class JobSeeker extends User {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="jobSeeker")	
-	private List<EducationForCv> educations;
+	private List<EducationForCv> educations;	
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="jobSeeker")	
@@ -86,4 +85,8 @@ public class JobSeeker extends User {
 
 	@Column(name = "is_verified", columnDefinition = "boolean default false")
 	private boolean isVerified = false;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="jobSeeker")	
+	private List<Favorites> favorites;
 }

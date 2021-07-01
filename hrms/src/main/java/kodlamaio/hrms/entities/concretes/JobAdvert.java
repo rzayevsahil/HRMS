@@ -1,6 +1,7 @@
 package kodlamaio.hrms.entities.concretes;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
@@ -67,7 +69,7 @@ public class JobAdvert {
 	private LocalDate publishedAt= LocalDate.now();
 
 	@Column(name = "created_at", columnDefinition = "Date default CURRENT_DATE")
-	@JsonIgnore
+	//@JsonIgnore
 	private LocalDate createdAt = LocalDate.now();
 
 	
@@ -105,4 +107,9 @@ public class JobAdvert {
 	@OneToOne(mappedBy="jobAdvert")
 	@JsonIgnore
 	private JobAdvertConfirmation jobAdvertConfirmation;
+	
+
+	//@JsonIgnore
+	@OneToMany(mappedBy="jobAdvert")	
+	private List<Favorites> favorites;
 }

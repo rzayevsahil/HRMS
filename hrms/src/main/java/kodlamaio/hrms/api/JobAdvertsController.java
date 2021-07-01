@@ -76,6 +76,10 @@ public class JobAdvertsController {
 		return this.jobAdvertService.getJobAdvertDetails();
 	}
 	
+	@GetMapping("getAllPagination")
+	public DataResult<List<JobAdvert>> getAllPagination(@RequestParam int pageNo){
+		return this.jobAdvertService.getAllPagination(pageNo);
+	}
 	
 	
 	//-----------------------------------------------------------------------------

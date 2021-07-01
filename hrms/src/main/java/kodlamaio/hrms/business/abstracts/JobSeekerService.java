@@ -18,4 +18,5 @@ public interface JobSeekerService {
 	Result delete(int id);
 	
 	DataResult<JobSeekerCvDto> getJobseekerCVById(int id);
+	
 }

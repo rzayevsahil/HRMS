@@ -2,6 +2,8 @@ package kodlamaio.hrms.entities.dtos;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +21,7 @@ public class JobAdvertDetailDto {
 	private int maxSalary;	
 	private int openPositionCount;	
 	private LocalDate deadLine;
+	@JsonIgnore
 	private boolean isActive;	
 	private int workTypeId;	
 	private int workHourId;
