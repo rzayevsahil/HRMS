@@ -31,7 +31,7 @@ public class Favorites {
 	@JoinColumn(name="jobseeker_id")
 	private JobSeeker jobSeeker;
 
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name="jobadvert_id")
 	private JobAdvert jobAdvert;
 	

@@ -59,4 +59,23 @@ public class EmployersController {
 		return this.employerService.getById(id);
 	}
 	
+	@GetMapping("getallbyverify")
+	public DataResult<List<Employer>> getAllByVerify(){
+	return this.employerService.getAllByVerify(); 
+	}
+	
+	@PostMapping("changeverifiedstatus")
+	public  ResponseEntity<?> changeIsVerifiedByEmployee(@RequestParam int id) {
+		return ResponseEntity.ok(this.employerService.changeIsVerifiedByEmployee(id));
+	}
+	@GetMapping("countById")
+	public long  countById(@RequestParam int id) {
+		return this.employerService.countById(id);
+	}
+	
+	@GetMapping("countGetAll")
+	public long  countGetALL() {
+		return this.employerService.countGetAll();
+	}
+	
 }

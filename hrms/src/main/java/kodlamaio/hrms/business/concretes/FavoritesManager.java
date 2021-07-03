@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.FavoritesService;
 import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.core.utilities.ErrorResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.FavoritesDao;
 import kodlamaio.hrms.entities.concretes.Favorites;
+import lombok.experimental.var;
 
 @Service
 public class FavoritesManager implements FavoritesService {
@@ -43,8 +45,15 @@ public class FavoritesManager implements FavoritesService {
 
 	@Override
 	public Result add(Favorites favorites) {
-		this.favoritesDao.save(favorites);
-		return new SuccessResult("Eklendi");
+		//var a=this.favoritesDao.getByJobSeeker_Id(favorites.getJobSeeker().getId());
+		//var b=this.favoritesDao.getByJobAdvert_Id(favorites.getJobAdvert().getId());
+		//System.out.println(a);
+		//if (b==null) {
+			this.favoritesDao.save(favorites);
+			return new SuccessResult("Eklendi");
+		//}
+		/*this.delete(favorites.getJobSeeker().getId(), favorites.getJobAdvert().getId());
+		return new ErrorResult("Bu daha önce eklenmiş ");*/
 	}
 
 	@Override

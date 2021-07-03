@@ -29,6 +29,7 @@ import lombok.NoArgsConstructor;
 @Table(name="employees")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertConfirmations"})
 public class Employee extends User{
+	
 
 	@Column(name = "first_name")
 	@NotNull(message="firstname cannot be null")
@@ -45,4 +46,6 @@ public class Employee extends User{
 	@OneToMany(mappedBy="employee")
 	@JsonIgnore
 	private List<JobAdvertConfirmation> jobAdvertConfirmations;
+	
+	
 }

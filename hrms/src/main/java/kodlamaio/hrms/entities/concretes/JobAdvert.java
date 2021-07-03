@@ -3,8 +3,10 @@ package kodlamaio.hrms.entities.concretes;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +24,7 @@ import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,6 +35,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="job_adverts")
+//@JsonIgnoreProperties({"hibernateLazyInitializer","handler","favorites"})
 public class JobAdvert {
 
 	@Id
@@ -109,7 +113,7 @@ public class JobAdvert {
 	private JobAdvertConfirmation jobAdvertConfirmation;
 	
 
-	//@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy="jobAdvert")	
 	private List<Favorites> favorites;
 }

@@ -63,6 +63,31 @@ public class EmployerManager implements EmployerService {
 	public DataResult<Employer> getById(int id) {
 		return new SuccessDataResult<Employer>(this.employerDao.getById(id),"Data listelendi");
 	}
+	
+	
+	
+	@Override
+	public DataResult<List<Employer>> getAllByVerify() {
+		return new SuccessDataResult<List<Employer>>(this.employerDao.getAllByVerify());
+	}
+
+	@Override
+	public Result changeIsVerifiedByEmployee(int employerId) {
+		Employer employer = this.employerDao.getById(employerId);
+		employer.setVerified(!employer.isVerified());
+		this.employerDao.save(employer);
+		return new SuccessResult("Şirketin Doğrulanma durumu değiştirildi");
+	}
+
+	@Override
+	public long countById(int id) {
+		return this.employerDao.countById(id);
+	}
+
+	@Override
+	public long countGetAll() {
+		return this.employerDao.count();
+	}
 
 	
 	//******************************************* KURALLAR *******************************************
