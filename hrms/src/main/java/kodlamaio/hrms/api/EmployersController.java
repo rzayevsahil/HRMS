@@ -68,6 +68,7 @@ public class EmployersController {
 	public  ResponseEntity<?> changeIsVerifiedByEmployee(@RequestParam int id) {
 		return ResponseEntity.ok(this.employerService.changeIsVerifiedByEmployee(id));
 	}
+	
 	@GetMapping("countById")
 	public long  countById(@RequestParam int id) {
 		return this.employerService.countById(id);

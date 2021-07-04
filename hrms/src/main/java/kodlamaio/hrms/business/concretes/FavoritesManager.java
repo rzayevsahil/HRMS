@@ -70,4 +70,14 @@ public class FavoritesManager implements FavoritesService {
 		return new SuccessDataResult<Favorites>(this.favoritesDao.getById(id));
 	}
 
+	@Override
+	public long countGetAll() {
+		return this.favoritesDao.count();
+	}
+
+	@Override
+	public DataResult<Favorites> getByJobSeekerIdAndJobAdvertId(int jobSeekerId, int jobAdvertId) {
+		return new SuccessDataResult<Favorites>()this.favoritesDao.getByJobSeekerIdAndJobAdvertId(jobSeekerId, jobAdvertId);
+	}
+
 }

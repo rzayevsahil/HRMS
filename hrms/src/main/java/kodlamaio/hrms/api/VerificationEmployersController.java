@@ -3,6 +3,7 @@ package kodlamaio.hrms.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,5 +53,10 @@ public class VerificationEmployersController {
 	@GetMapping("getAllByVerifyFalse")
 	public DataResult<List<VerificationEmployer>> getAllByVerifyFalse(){
 		return this.verificationEmployerService.getAllByVerifyFalse();
+	}
+	
+	@PostMapping("changeverificationemployerstatus")
+	public  ResponseEntity<?> changeIsVerifiedByEmployee(@RequestParam int id) {
+		return ResponseEntity.ok(this.verificationEmployerService.changeIsVerifiedByEmployee(id));
 	}
 }

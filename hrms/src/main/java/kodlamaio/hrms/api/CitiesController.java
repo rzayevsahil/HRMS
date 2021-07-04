@@ -63,4 +63,9 @@ public class CitiesController {
 		return this.cityService.getById(id);
 	}
 	
+	@GetMapping("countGetAll")
+	public long  countGetALL() {
+		return this.cityService.countGetAll();
+	}
+	
 }

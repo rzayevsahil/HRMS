@@ -63,4 +63,9 @@ public class UsersController {
 		return this.userService.getById(id);
 	}
 	
+	@GetMapping("countGetAll")
+	public long  countGetALL() {
+		return this.userService.countGetAll();
+	}
+	
 }

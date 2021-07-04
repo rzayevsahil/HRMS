@@ -60,5 +60,10 @@ public class EmployeesController {
 	public DataResult<Employee> getById(@RequestParam int id){
 		return this.employeeService.getById(id);
 	}
+	
+	@GetMapping("countGetAll")
+	public long  countGetALL() {
+		return this.employeeService.countGetAll();
+	}
 
 }

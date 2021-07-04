@@ -59,4 +59,9 @@ public class UserManager implements UserService {
 		return new SuccessDataResult<User>(this.userDao.findById(id));
 	}
 
+	@Override
+	public long countGetAll() {
+		return this.userDao.count();
+	}
+
 }

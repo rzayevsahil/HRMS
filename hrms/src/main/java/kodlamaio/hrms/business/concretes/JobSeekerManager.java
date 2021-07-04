@@ -108,6 +108,10 @@ public class JobSeekerManager implements JobSeekerService {
 		return new SuccessDataResult<JobSeekerCvDto>(cv);
 	}
 	
+	@Override
+	public long countGetAll() {
+		return this.jobseekerDao.count();
+	}
 	
 	//******************************************* KURALLAR *******************************************
 

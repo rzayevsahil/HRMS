@@ -73,4 +73,9 @@ public class JobPositionManager implements JobPositionService {
 		return new SuccessResult();
 	}
 
+	@Override
+	public long countGetAll() {
+		return this.jobPositionDao.count();
+	}
+
 }

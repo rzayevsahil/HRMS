@@ -50,6 +50,19 @@ public class VerificationEmployerManager implements VerificationEmployerService{
 	public DataResult<List<VerificationEmployer>> getAllByVerifyFalse() {
 		return new SuccessDataResult<List<VerificationEmployer>>(this.verificationEmployerDao.getAllByVerifyFalse());
 	}
+
+	@Override
+	public Result changeIsVerifiedByEmployee(int verificationEmployerId) {
+		VerificationEmployer verificationEmployer=this.verificationEmployerDao.getById(verificationEmployerId);
+		verificationEmployer.setVerified(true);
+		this.verificationEmployerDao.save(verificationEmployer);
+		return new SuccessResult("false yapıldı");
+	}
+
+	@Override
+	public long countGetAll() {
+		return this.verificationEmployerDao.count();
+	}
 	
 	
 	

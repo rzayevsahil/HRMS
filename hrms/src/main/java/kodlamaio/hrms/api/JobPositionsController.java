@@ -58,4 +58,9 @@ public class JobPositionsController {
 		return this.jobPositionService.getById(id);
 	}
 	
+	@GetMapping("countGetAll")
+	public long  countGetALL() {
+		return this.jobPositionService.countGetAll();
+	}
+	
 }

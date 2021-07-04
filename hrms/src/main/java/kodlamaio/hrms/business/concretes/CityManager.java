@@ -115,6 +115,11 @@ public class CityManager implements CityService{
 		return new SuccessDataResult<City>(this.cityDao.getById(id));
 	}
 
+
+	@Override
+	public long countGetAll() {
+		return this.cityDao.count();
+	}
 	
 	//********************** Kurallar *****************************
 	
@@ -124,5 +129,6 @@ public class CityManager implements CityService{
 		}
 		return new SuccessResult();
 	}
+
 	
 }

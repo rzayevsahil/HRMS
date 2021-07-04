@@ -236,6 +236,11 @@ public class JobAdvertManager implements JobAdvertService {
 	}
 
 	
+	@Override
+	public long countGetAll() {
+		return this.jobAdvertDao.count();
+	}
+	
 
 	//************************** Kurallar ***********************************
 	
@@ -268,6 +273,8 @@ public class JobAdvertManager implements JobAdvertService {
 		}
 		return new ErrorResult("Alanlar boş olamaz");
 	}
+
+
 
 	
 	

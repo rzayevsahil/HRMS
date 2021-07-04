@@ -116,4 +116,9 @@ public class JobAdvertsController {
 		return this.jobAdvertService.getAllByEmployerId(id);
 	}
 	
+	@GetMapping("countGetAll")
+	public long  countGetALL() {
+		return this.jobAdvertService.countGetAll();
+	}
+	
 }

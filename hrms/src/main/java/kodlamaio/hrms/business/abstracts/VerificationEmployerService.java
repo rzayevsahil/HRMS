@@ -7,6 +7,7 @@ import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.entities.concretes.VerificationEmployer;
 
 public interface VerificationEmployerService {
+	
 	Result add(VerificationEmployer verificationEmployer);
 
 	Result delete(int id);
@@ -16,4 +17,8 @@ public interface VerificationEmployerService {
 	DataResult<VerificationEmployer> getById(int id);
 	
 	DataResult<List<VerificationEmployer>> getAllByVerifyFalse();
+	
+	Result changeIsVerifiedByEmployee(int verificationEmployerId);
+	
+	long countGetAll();
 }

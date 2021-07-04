@@ -18,4 +18,6 @@ public interface JobPositionService {
 	
 	DataResult<JobPosition> getById(int id);
 	DataResult<JobPosition> getJobByTitle(String title);
+	
+	long countGetAll();
 }

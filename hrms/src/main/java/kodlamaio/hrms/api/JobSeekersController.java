@@ -70,4 +70,9 @@ public class JobSeekersController {
 		return this.jobseekerService.getById(id);
 	}
 	
+	@GetMapping("countGetAll")
+	public long  countGetALL() {
+		return this.jobseekerService.countGetAll();
+	}
+	
 }

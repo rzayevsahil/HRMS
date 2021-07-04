@@ -16,4 +16,6 @@ public interface UserService {
 	
 	DataResult<User> getById(int id);	
 	DataResult<User> getUserByEmail(String email);
+	
+	long countGetAll();
 }

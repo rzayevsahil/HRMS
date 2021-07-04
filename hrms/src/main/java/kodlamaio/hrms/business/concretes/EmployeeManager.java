@@ -51,4 +51,9 @@ public class EmployeeManager implements EmployeeService{
 	    return new SuccessResult("Employee deleted.");
 	}
 
+	@Override
+	public long countGetAll() {
+		return this.employeeDao.count();
+	}
+
 }

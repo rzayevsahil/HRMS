@@ -17,4 +17,6 @@ public interface CityService {
 	Result add(City city) throws FileNotFoundException, DocumentException ;
 	Result update(City city);
 	Result delete(int cityId);
+	
+	long countGetAll();
 }

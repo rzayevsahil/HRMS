@@ -39,4 +39,6 @@ public interface JobAdvertService {
 	DataResult<List<JobAdvert>> findAllByIsActiveTrue();
 	
 	DataResult<List<JobAdvertDto>> getJobAdvertDetails();
+	
+	long countGetAll();
 }

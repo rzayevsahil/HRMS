@@ -61,4 +61,14 @@ public class FavoritesController {
 	public DataResult<Favorites> getById(@RequestParam int id){
 		return this.favoriteService.getById(id);
 	}
+	
+	@GetMapping("countGetAll")
+	public long  countGetALL() {
+		return this.favoriteService.countGetAll();
+	}
+	
+	@GetMapping("getByJobSeekerIdAndJobAdvertId")
+	public DataResult<Favorites> getByJobSeekerIdAndJobAdvertId(@RequestParam int jobSeekerId,@RequestParam int jobAdvertId){
+		return this.favoriteService.getByJobSeekerIdAndJobAdvertId(jobSeekerId,jobAdvertId);
+	}
 }

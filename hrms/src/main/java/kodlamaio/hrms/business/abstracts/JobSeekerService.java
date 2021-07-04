@@ -19,4 +19,6 @@ public interface JobSeekerService {
 	
 	DataResult<JobSeekerCvDto> getJobseekerCVById(int id);
 	
+	long countGetAll();
+	
 }

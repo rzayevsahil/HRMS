@@ -16,4 +16,8 @@ public interface FavoritesService{
 	Result add(Favorites favorites);
 	Result delete(int jobSeekerId,int jobAdvertId);
 	
+	long countGetAll();
+	
+	DataResult<Favorites> getByJobSeekerIdAndJobAdvertId(int jobSeekerId,int jobAdvertId);
+	
 }
