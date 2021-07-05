@@ -15,6 +15,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,6 +46,7 @@ public class User {
 	@Size(min=6,message = "Şifre en az 6 karakter olucak")
 	private String password;	
 
+	@JsonIgnore
 	@Column(name= "created_at", columnDefinition = "Date default CURRENT_DATE")
 	private LocalDateTime createdAt = LocalDateTime.now();
 	

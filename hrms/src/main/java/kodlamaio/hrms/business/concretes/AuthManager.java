@@ -58,7 +58,7 @@ public class AuthManager implements AuthService{
 				checkIfEqualPasswordAndConfirmPassword(employer.getPassword(), confirmPassword));
 		
 		if (result.isSuccess()) {
-			
+			employer.setVerified(true);
 			employerService.add(employer);
 			String code = verificationService.sendCode();
 			verificationCodeRecord(code, employer.getId(), employer.getEmail());			
@@ -80,7 +80,7 @@ public class AuthManager implements AuthService{
 			jobseekerService.add(jobseeker);
 			String code = verificationService.sendCode();
 			verificationCodeRecord(code, jobseeker.getId(), jobseeker.getEmail());
-			mailSenderService.sendSimpleEmail(jobseeker.getEmail(), "Hrms verification code","Doğrulama kodunuz : " + code + "\nİsminiz : "+jobseeker.getFirstName()+"\nSoyisminiz : " + jobseeker.getLastName()+"\nHrms websitesine hoş geldiniz...Güzel bi kariyer sizi bekliyor...\nSevgiyle Hrms Website"); //gerçek zamanlı mesaj gönderir
+			//mailSenderService.sendSimpleEmail(jobseeker.getEmail(), "Hrms verification code","Doğrulama kodunuz : " + code + "\nİsminiz : "+jobseeker.getFirstName()+"\nSoyisminiz : " + jobseeker.getLastName()+"\nHrms websitesine hoş geldiniz...Güzel bi kariyer sizi bekliyor...\nSevgiyle Hrms Website"); //gerçek zamanlı mesaj gönderir
 			return new SuccessResult("Registration has been successfully completed");
 		}
 		
@@ -106,6 +106,7 @@ public class AuthManager implements AuthService{
 	
 	
 	private Result checkIfEqualEmailAndDomain(String email, String website) {
+		//www.website.com bu şekildeyse burda www. dan sonraki kısmı alıyoruz
 		String[] emailArr = email.split("@", 2);
 		String domain = website.substring(4, website.length());
 
@@ -114,7 +115,7 @@ public class AuthManager implements AuthService{
 			return new SuccessResult();
 		}
 
-		return new ErrorResult("Invalid email address");
+		return new ErrorResult("Email website domaini ile aynı domaine sahip olmalı");
 	}
 
 	
@@ -156,14 +157,14 @@ public class AuthManager implements AuthService{
 	
 	private Result checkIfEmailExists(String email) {
 		
-	// emaili kontrol ediyor eğer email varsa ekleme olmıycak
+	// emaili kontrol ediyor eğer email varsa ekleme olmayacak
 		
 		if (this.userService.getUserByEmail(email).getData() == null) {
 
 			return new SuccessResult();
 		}
 
-		return new ErrorResult("This Email is available");
+		return new ErrorResult("Bu email'e kayıtlı başka bir hesap mevcut!");
 	}
 	
 	
