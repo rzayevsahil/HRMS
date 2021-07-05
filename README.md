@@ -7,7 +7,9 @@
 <br>
 
 ## *Gerçek email'e doğrulama mesajı gönderme*
+![WhatsApp Image 2021-06-20 at 16 37 53](https://user-images.githubusercontent.com/58303745/124522371-19dbc200-de04-11eb-907a-726371000ce2.jpeg)
 <img src="https://user-images.githubusercontent.com/58303745/122657001-9ddd4b00-d170-11eb-81d1-a645fb271a6b.jpg" width="80%" />
+
 
 
 ## *BACKEND İSTERLERİ* 
