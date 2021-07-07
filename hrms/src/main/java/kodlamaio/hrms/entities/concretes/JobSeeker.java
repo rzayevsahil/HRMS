@@ -45,7 +45,7 @@ public class JobSeeker extends User {
 	@Size(min = 2, max = 25, message = "LastName must be between 2 and 25 characters")
 	private String lastName;
 
-	@Column(name = "national_id",unique = true)
+	@Column(name = "national_id")
 	@NotNull(message = "NationalId cannot be null")
 	@Size(min = 11, max = 11, message = "NationalId must be 11 characters")
 	private String nationalId;

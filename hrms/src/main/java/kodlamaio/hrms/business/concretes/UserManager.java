@@ -10,9 +10,12 @@ import kodlamaio.hrms.business.abstracts.UserService;
 import kodlamaio.hrms.core.dataAccess.UserDao;
 import kodlamaio.hrms.core.entities.User;
 import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.core.utilities.ErrorDataResult;
+import kodlamaio.hrms.core.utilities.ErrorResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
+import kodlamaio.hrms.core.utilities.business.BusinessRules;
 
 @Service
 public class UserManager implements UserService {
@@ -62,6 +65,15 @@ public class UserManager implements UserService {
 	@Override
 	public long countGetAll() {
 		return this.userDao.count();
+	}
+	
+
+	@Override
+	public DataResult<User> findByEmailAndPassword(String email, String password) {
+		if (!this.userDao.findByEmail(email).getPassword().equals(password)) {
+			return new ErrorDataResult<User>("Şifre ve ya email yanlış!");
+		}
+		return new SuccessDataResult<User>(this.userDao.findByEmailAndPassword(email, password));
 	}
 
 }

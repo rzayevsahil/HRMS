@@ -10,6 +10,7 @@ public interface UserDao extends JpaRepository<User,Integer> {
 	//veritabanında Email arıyor
 	User findById(int id);
 	User findByEmail(String email);
+	User findByEmailAndPassword(String email,String password);
 	
 	//@Modifying()
 	//@Query("delete from User where b.id=:id")

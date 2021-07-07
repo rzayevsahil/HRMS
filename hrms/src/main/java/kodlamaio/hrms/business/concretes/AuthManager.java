@@ -18,6 +18,7 @@ import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.core.utilities.adapters.mernis.MernisService;
 import kodlamaio.hrms.core.utilities.business.BusinessRules;
 import kodlamaio.hrms.core.utilities.verification.VerificationService;
+import kodlamaio.hrms.dataAccess.abstracts.JobSeekerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
 import kodlamaio.hrms.entities.concretes.JobSeeker;
 import kodlamaio.hrms.entities.concretes.VerificationCode;
@@ -32,11 +33,12 @@ public class AuthManager implements AuthService{
 	private MernisService mernisService;
 	private VerificationCodeService verificationCodeService;
 	private MailSenderService mailSenderService;
+	private JobSeekerDao jobSeekerDao;
 	
 	@Autowired
 	public AuthManager(UserService userService, EmployerService employerService, JobSeekerService jobseekerService,
 			VerificationService verificationService, MernisService mernisService,
-			VerificationCodeService verificationCodeService, MailSenderService mailSenderService) {
+			VerificationCodeService verificationCodeService, MailSenderService mailSenderService,JobSeekerDao jobSeekerDao) {
 		super();
 		this.userService = userService;
 		this.employerService = employerService;
@@ -45,6 +47,7 @@ public class AuthManager implements AuthService{
 		this.mernisService = mernisService;
 		this.verificationCodeService = verificationCodeService;
 		this.mailSenderService=mailSenderService;
+		this.jobSeekerDao=jobSeekerDao;
 	}
 	
 	
@@ -137,11 +140,11 @@ public class AuthManager implements AuthService{
 		
 		// NationalId yi kontrol ediyor varsa eklemiycek 
 		
-		if (this.jobseekerService.getJobseekerByNationalId(nationalId).getData() == null) {
-			return new SuccessResult();
+		if (jobSeekerDao.findAllByNationalId(nationalId).stream().count() != 0) {
+			return new ErrorResult("Bu kimlik numarası sistemde kayıtlı! Lütfen başka bir kimlik numarası deneyin.");
 		}
 		
-		return new ErrorResult("This NationalId is available.");
+		return new SuccessResult();
 	}
 	
 
@@ -174,7 +177,7 @@ public class AuthManager implements AuthService{
 		
 		if (!password.equals(confirmPassword)) {
 			
-			return new ErrorResult("Passwords do not match.");
+			return new ErrorResult("Şifreler uyuşmuyor!");
 		}
 
 		return new SuccessResult();

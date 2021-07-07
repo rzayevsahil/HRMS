@@ -68,4 +68,9 @@ public class UsersController {
 		return this.userService.countGetAll();
 	}
 	
+	@GetMapping("findByEmailAndPassword")
+	public Result  findByEmailAndPassword(@RequestParam String email,String password) {
+		return this.userService.findByEmailAndPassword(email,password);
+	}
+	
 }

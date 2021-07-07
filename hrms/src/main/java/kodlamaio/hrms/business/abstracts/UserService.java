@@ -14,6 +14,8 @@ public interface UserService {
 	Result update(User user);
 	Result delete(int id);
 	
+	DataResult<User> findByEmailAndPassword(String email,String password);	
+	
 	DataResult<User> getById(int id);	
 	DataResult<User> getUserByEmail(String email);
 	
