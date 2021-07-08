@@ -32,6 +32,7 @@
 
 ---
 
+
 ## *🔴: Madde 2 : İş verenler sisteme kayıt olabilmelidir.*
 
 ### Kabul Kriterleri:
